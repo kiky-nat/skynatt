@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   SkyNatt — Downloads
+  </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Fredoka:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body class="subpage">
+  <header class="nav">
+   <a class="brand" href="index.html">
+    <img src="assets/logo.svg"/>
+    <span>
+     SKYNATT
+    </span>
+   </a>
+   <div class="nav-actions">
+    <button id="lang">
+     EN
+    </button>
+    <button id="theme">
+     ☾
+    </button>
+   </div>
+  </header>
+  <main class="page-wrap">
+   <section class="page-hero">
+    <p class="eyebrow">
+     MY DOWNLOADS
+    </p>
+    <h1 data-i18n="downloadTitle">
+     Tus compras, en un solo lugar.
+    </h1>
+    <p data-i18n="downloadText">
+     Consulta tus productos y abre las herramientas disponibles.
+    </p>
+   </section>
+   <div class="purchase-card purchase-link-card">
+    <div class="purchase-head">
+     <h2>
+      Vincular una compra
+     </h2>
+     <span class="badge">
+      VERIFICACIÓN
+     </span>
+    </div>
+    <p class="muted">
+     Si compraste con el mismo correo de tu cuenta, introduce tu número de pedido para vincular la compra verificada.
+    </p>
+    <form class="admin-form" id="purchaseClaimForm">
+     <label>
+      Número de pedido
+      <input autocomplete="off" name="orderReference" required=""/>
+     </label>
+     <button class="btn primary" type="submit">
+      Vincular compra
+     </button>
+    </form>
+    <p class="form-note" id="purchaseClaimStatus">
+    </p>
+   </div>
+   <div class="purchase-card">
+    <div class="purchase-head">
+     <h2 data-i18n="purchaseTitle">
+      Mis productos
+     </h2>
+     <span class="badge" data-i18n="demoBadge">
+      DEMO / PREPARADO
+     </span>
+    </div>
+    <div id="purchaseList">
+    </div>
+    <p class="form-note" data-i18n="purchaseNote">
+     La verificación automática de compras de Etsy/VGen requiere sus APIs o un sistema de importación autorizado.
+    </p>
+   </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+  </script>
+  <script src="config.js">
+  </script>
+  <script src="script.js">
+  </script>
+ </body>
+</html>

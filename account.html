@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   SkyNatt — Cuenta
+  </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Fredoka:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body class="subpage">
+  <header class="nav">
+   <a class="brand" href="index.html">
+    <img src="assets/logo.svg"/>
+    <span>
+     SKYNATT
+    </span>
+   </a>
+   <div class="nav-actions">
+    <button id="lang">
+     EN
+    </button>
+    <button id="theme">
+     ☾
+    </button>
+   </div>
+  </header>
+  <main class="page-wrap">
+   <section class="page-hero">
+    <p class="eyebrow" data-i18n="accountKicker">
+     CUENTA
+    </p>
+    <h1 data-i18n="accountTitle">
+     Tu espacio personal.
+    </h1>
+    <p data-i18n="accountText">
+     La cuenta es opcional. Puedes crearla con un usuario, correo y contraseña, sin pedirte datos personales innecesarios.
+    </p>
+   </section>
+   <div class="account-card">
+    <div class="account-tabs">
+     <button class="active" data-i18n="createAccountTab" data-tab="create">
+      Crear cuenta
+     </button>
+     <button data-i18n="loginAccountTab" data-tab="login">
+      Iniciar sesión
+     </button>
+     <button data-i18n="profileTab" data-tab="profile">
+      Mi perfil
+     </button>
+    </div>
+    <div id="createPane">
+     <form class="admin-form" id="createAccountForm">
+      <label>
+       <span data-i18n="usernameLabel">
+        Usuario
+       </span>
+       <input autocomplete="username" id="accountUsername" maxlength="30" minlength="3" name="username" required=""/>
+      </label>
+      <label>
+       <span data-i18n="emailLabel">
+        Correo electrónico
+       </span>
+       <input autocomplete="email" id="accountEmail" name="email" required="" type="email"/>
+      </label>
+      <label>
+       <span data-i18n="passwordLabel">
+        Contraseña
+       </span>
+       <input autocomplete="new-password" id="accountPassword" minlength="8" name="password" required="" type="password"/>
+      </label>
+      <button class="btn primary" data-i18n="createAccount">
+       Crear cuenta
+      </button>
+     </form>
+     <p class="form-note" id="createStatus">
+     </p>
+     <p class="form-note" data-i18n="accountPrivacy">
+      No necesitas introducir nombre real, dirección, teléfono ni otros datos que no sean necesarios para tu cuenta.
+     </p>
+    </div>
+    <div hidden="" id="loginPane">
+     <form class="admin-form" id="loginForm">
+      <label>
+       <span data-i18n="emailLabel">
+        Correo electrónico
+       </span>
+       <input autocomplete="email" name="email" required="" type="email"/>
+      </label>
+      <label>
+       <span data-i18n="passwordLabel">
+        Contraseña
+       </span>
+       <input autocomplete="current-password" name="password" required="" type="password"/>
+      </label>
+      <button class="btn primary" data-i18n="loginAccount">
+       Iniciar sesión
+      </button>
+     </form>
+     <p class="form-note" id="loginStatus">
+     </p>
+     <button class="btn ghost" data-i18n="syncLogin" hidden="" id="supabaseLogin">
+      Usar cuenta sincronizada
+     </button>
+    </div>
+    <div hidden="" id="profilePane">
+     <div class="profile-summary">
+      <span class="profile-avatar">
+       ✦
+      </span>
+      <div>
+       <p class="eyebrow" data-i18n="loggedInAs">
+        CONECTADO COMO
+       </p>
+       <h2 id="accountUsernameView">
+        —
+       </h2>
+       <p class="muted" id="accountEmailView">
+        —
+       </p>
+      </div>
+     </div>
+     <div class="account-actions">
+      <button class="btn ghost" data-i18n="logout" id="logoutAccount">
+       Cerrar sesión
+      </button>
+      <a class="btn primary" data-i18n="goDownloads" href="downloads.html">
+       Ir a mis descargas
+      </a>
+     </div>
+     <p class="form-note" id="profileStatus">
+     </p>
+    </div>
+   </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+  </script>
+  <script src="config.js">
+  </script>
+  <script src="script.js">
+  </script>
+ </body>
+</html>

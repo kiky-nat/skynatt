@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   SkyNatt — Studio
+  </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Fredoka:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body class="subpage">
+  <header class="nav">
+   <a class="brand" href="index.html">
+    <img alt="SkyNatt" src="assets/logo.svg"/>
+    <span>
+     SKYNATT
+    </span>
+   </a>
+   <nav class="desktop-nav">
+    <a data-i18n="navAbout" href="index.html#about">
+     Sobre mí
+    </a>
+    <a data-i18n="navCreations" href="index.html#creations">
+     Creaciones
+    </a>
+    <a data-i18n="navShop" href="index.html#shop">
+     Tienda
+    </a>
+    <a data-i18n="navCommissions" href="index.html#commissions">
+     Comisiones
+    </a>
+    <a data-i18n="navStudio" href="studio.html">
+     Studio
+    </a>
+    <a data-i18n="navTerms" href="terms.html">
+     Términos
+    </a>
+   </nav>
+   <div class="nav-actions">
+    <button id="lang">
+     EN
+    </button>
+    <button id="theme">
+     ☾
+    </button>
+   </div>
+  </header>
+  <main class="page-wrap">
+   <section class="page-hero">
+    <p class="eyebrow" data-i18n="studioKicker">
+     SKYNATT STUDIO
+    </p>
+    <h1 data-i18n="studioTitle">
+     Todo lo que ocurre detrás de la página.
+    </h1>
+    <p data-i18n="studioText">
+     Aquí reunimos streams, redes, testimonios, Guestbook y mi setup sin cargar demasiado el Home.
+    </p>
+   </section>
+   <section class="section inside" id="stream">
+    <div class="section-head">
+     <p class="eyebrow" data-i18n="streamKicker">
+      STREAM
+     </p>
+     <h2 data-i18n="streamTitle">
+      Directos.
+     </h2>
+    </div>
+    <div class="stream-grid">
+     <article class="stream-card">
+      <span class="stream-dot">
+      </span>
+      <div>
+       <small data-i18n="lastStream">
+        ÚLTIMO DIRECTO
+       </small>
+       <h3 id="lastStreamTitle">
+       </h3>
+       <p id="lastStreamText">
+       </p>
+      </div>
+      <a class="btn ghost" data-link="twitch" href="#">
+       Twitch ↗
+      </a>
+     </article>
+     <article class="stream-card">
+      <span class="calendar-icon">
+       ◷
+      </span>
+      <div>
+       <small data-i18n="nextStream">
+        PRÓXIMO STREAM
+       </small>
+       <h3 id="nextStreamTitle">
+       </h3>
+       <p id="nextStreamText">
+       </p>
+      </div>
+     </article>
+    </div>
+   </section>
+   <section class="section inside" id="social">
+    <div class="section-head">
+     <p class="eyebrow" data-i18n="socialKicker">
+      SOCIALES
+     </p>
+     <h2 data-i18n="socialTitle">
+      Desde mi timeline.
+     </h2>
+    </div>
+    <div class="social-grid" id="socialPosts">
+    </div>
+   </section>
+   <section class="section inside" id="testimonials">
+    <div class="section-head">
+     <p class="eyebrow" data-i18n="testKicker">
+      TESTIMONIOS
+     </p>
+     <h2 data-i18n="testTitle">
+      Lo que dicen.
+     </h2>
+     <p class="muted" data-i18n="testText">
+      Solo mostramos testimonios aprobados. VGen/Etsy no publican automáticamente sus reseñas aquí: tú eliges cuáles destacar.
+     </p>
+    </div>
+    <div class="testimonial-grid" id="testimonialsList">
+    </div>
+   </section>
+   <section class="section inside" id="guestbook">
+    <div class="section-head">
+     <p class="eyebrow" data-i18n="guestKicker">
+      GUESTBOOK
+     </p>
+     <h2 data-i18n="guestTitle">
+      Deja un mensajito.
+     </h2>
+     <p class="muted" data-i18n="guestText">
+      Los mensajes pasan primero por moderación.
+     </p>
+    </div>
+    <div class="guest-grid">
+     <form class="guest-form" id="guestForm">
+      <label>
+       <span data-i18n="nameLabel">
+        Nombre
+       </span>
+       <input maxlength="60" name="name" placeholder="Sky / Anonymous"/>
+      </label>
+      <label>
+       <span data-i18n="messageLabel">
+        Mensaje
+       </span>
+       <textarea maxlength="500" name="message" placeholder="Escribe algo bonito..." required=""></textarea>
+      </label>
+      <label class="check">
+       <input name="anonymous" type="checkbox"/>
+       <span data-i18n="anonymous">
+        Mostrarme como anónimo
+       </span>
+      </label>
+      <button class="btn primary" data-i18n="send" type="submit">
+       Enviar ✦
+      </button>
+      <p class="form-note" data-i18n="guestNote">
+       Tu mensaje queda pendiente de moderación.
+      </p>
+     </form>
+     <div class="guest-list" id="guestList">
+     </div>
+    </div>
+   </section>
+   <section class="section inside" id="setup">
+    <div class="section-head">
+     <p class="eyebrow" data-i18n="setupKicker">
+      MY SETUP
+     </p>
+     <h2 data-i18n="setupTitle">
+      El rincón donde creo.
+     </h2>
+    </div>
+    <div class="setup-grid" id="setupGrid">
+    </div>
+   </section>
+   <section class="section inside" id="downloads">
+    <div class="section-head">
+     <p class="eyebrow" data-i18n="downloadKicker">
+      MY DOWNLOADS
+     </p>
+     <h2 data-i18n="downloadTitle">
+      Tus compras, en un solo lugar.
+     </h2>
+     <p class="muted" data-i18n="downloadText">
+      Consulta tus productos y abre las herramientas disponibles.
+     </p>
+    </div>
+    <div class="account-actions">
+     <a class="btn primary" data-i18n="accountBtn" href="account.html">
+      Crear / abrir mi cuenta
+     </a>
+     <a class="btn ghost" data-i18n="downloadsBtn" href="downloads.html">
+      Ver mis descargas
+     </a>
+    </div>
+   </section>
+  </main>
+  <footer>
+   <div>
+    <b>
+     SKYNATT
+    </b>
+    <span>
+     ✦ A little world between stars
+    </span>
+   </div>
+   <div class="footer-links">
+    <a data-i18n="footerHome" href="index.html">
+     Home
+    </a>
+    <a data-i18n="footerTerms" href="terms.html">
+     Términos
+    </a>
+   </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+  </script>
+  <script src="config.js">
+  </script>
+  <script src="script.js">
+  </script>
+ </body>
+</html>

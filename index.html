@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   SkyNatt — Oni of the Interspace
+  </title>
+  <meta content="SkyNatt — VTuber, artista y creadora de recursos digitales." name="description"/>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Fredoka:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="loading" id="loading">
+   <div class="loading-orbit">
+    <img alt="SkyNatt" src="assets/logo.svg"/>
+    <span>
+     ONI OF THE INTERSPACE
+    </span>
+    <b>
+     SKYNATT
+    </b>
+    <div class="loading-line">
+     <i>
+     </i>
+    </div>
+   </div>
+  </div>
+  <div aria-hidden="true" id="cursor">
+  </div>
+  <div aria-hidden="true" id="stars">
+  </div>
+  <div id="toast" role="status">
+  </div>
+  <div aria-hidden="true" class="floating-decor">
+  </div>
+  <header class="nav">
+   <a class="brand" href="#home">
+    <img alt="SkyNatt" src="assets/logo.svg"/>
+    <span>
+     SKYNATT
+    </span>
+   </a>
+   <nav class="desktop-nav">
+    <a data-i18n="navAbout" href="#about">
+     Sobre mí
+    </a>
+    <a data-i18n="navCreations" href="#creations">
+     Creaciones
+    </a>
+    <a data-i18n="navShop" href="#shop">
+     Tienda
+    </a>
+    <a data-i18n="navCommissions" href="#commissions">
+     Comisiones
+    </a>
+    <a data-i18n="navStudio" href="studio.html">
+     Studio
+    </a>
+    <a data-i18n="navTerms" href="terms.html">
+     Términos
+    </a>
+    <a data-i18n="navAccount" href="account.html">
+     Cuenta
+    </a>
+   </nav>
+   <div class="nav-actions">
+    <button id="lang">
+     EN
+    </button>
+    <button id="theme">
+     ☾
+    </button>
+    <button id="menu">
+     ☰
+    </button>
+   </div>
+  </header>
+  <div class="mobile-menu" id="mobileMenu">
+   <a data-i18n="navAbout" href="#about">
+    Sobre mí
+   </a>
+   <a data-i18n="navCreations" href="#creations">
+    Creaciones
+   </a>
+   <a data-i18n="navShop" href="#shop">
+    Tienda
+   </a>
+   <a data-i18n="navCommissions" href="#commissions">
+    Comisiones
+   </a>
+   <a data-i18n="navStudio" href="studio.html">
+    Studio
+   </a>
+   <a data-i18n="navTerms" href="terms.html">
+    Términos
+   </a>
+   <a data-i18n="navAccount" href="account.html">
+    Cuenta
+   </a>
+   <a data-i18n="navDownloads" href="downloads.html">
+    Descargas
+   </a>
+  </div>
+  <main id="home">
+   <section class="hero section">
+    <div class="hero-copy reveal">
+     <p class="eyebrow" data-i18n="heroEyebrow">
+      ✦ ONI OF THE INTERSPACE ✦
+     </p>
+     <h1 data-i18n="heroTitle">
+      Hola, soy
+      <span>
+       SkyNatt
+      </span>
+      .
+     </h1>
+     <p class="lead" data-i18n="heroLead">
+      VTuber · Artista · Creadora
+     </p>
+     <p class="muted" data-i18n="heroText">
+      Un pequeño rincón entre estrellas, arte, streams y recursos digitales.
+     </p>
+     <div class="actions">
+      <a class="btn primary" data-i18n="heroWork" href="#creations">
+       Ver mis trabajos
+      </a>
+      <a class="btn ghost" data-i18n="heroShop" href="#shop">
+       Explorar tienda
+      </a>
+     </div>
+     <div class="hero-mini">
+      <span>
+       ✦
+      </span>
+      <b data-i18n="heroMini">
+       2 slots de comisión al mes
+      </b>
+      <span>
+       ·
+      </span>
+      <span data-i18n="heroMini2">
+       Arte · VTubing · Planning
+      </span>
+     </div>
+    </div>
+    <div class="hero-art reveal">
+     <img alt="SkyNatt" class="hero-image" src="assets/hero-pose.png"/>
+    </div>
+   </section>
+   <div aria-label="SkyNatt topics" class="marquee">
+    <div class="marquee-track">
+     <div class="marquee-group">
+      <span>
+       ✦ ART · VTUBING · DESIGN
+      </span>
+      <span>
+       ∞ A LITTLE WORLD BETWEEN STARS
+      </span>
+      <span>
+       ✦ PLANNING · STUDY · DIGITAL GOODS
+      </span>
+      <span>
+       ∞ A LITTLE WORLD BETWEEN STARS
+      </span>
+     </div>
+     <div aria-hidden="true" class="marquee-group">
+      <span>
+       ✦ ART · VTUBING · DESIGN
+      </span>
+      <span>
+       ∞ A LITTLE WORLD BETWEEN STARS
+      </span>
+      <span>
+       ✦ PLANNING · STUDY · DIGITAL GOODS
+      </span>
+      <span>
+       ∞ A LITTLE WORLD BETWEEN STARS
+      </span>
+     </div>
+    </div>
+   </div>
+   <section class="section compact reveal" id="about">
+    <div class="section-head">
+     <p class="eyebrow" data-i18n="aboutKicker">
+      SOBRE SKYNATT
+     </p>
+     <h2 data-i18n="aboutTitle">
+      Un pequeño mundo entre estrellas.
+     </h2>
+    </div>
+    <div class="about-grid">
+     <div>
+      <p data-i18n="aboutText">
+       Soy SkyNatt, una VTuber oni y artista digital. Creo ilustraciones, emotes y recursos para streamers, pero también agendas, plantillas y herramientas digitales para estudiantes, profesores y cualquier persona que quiera organizarse a su manera.
+      </p>
+      <div class="chips">
+       <span>
+        VTuber
+       </span>
+       <span>
+        Illustration
+       </span>
+       <span>
+        Planning
+       </span>
+       <span>
+        Notion
+       </span>
+       <span>
+        GoodNotes
+       </span>
+       <span>
+        Study
+       </span>
+      </div>
+     </div>
+     <div class="quote">
+      “
+      <span data-i18n="aboutQuote">
+       Quiero crear cosas bonitas que también tengan un lugar útil en tu día a día.
+      </span>
+      ”
+     </div>
+    </div>
+   </section>
+   <section class="section reveal" id="creations">
+    <div class="section-head row-head">
+     <div>
+      <p class="eyebrow" data-i18n="creationKicker">
+       CREACIONES
+      </p>
+      <h2 data-i18n="creationTitle">
+       Cosas que he creado.
+      </h2>
+      <p class="muted" data-i18n="creationText">
+       Ilustraciones, overlays, emotes, agendas y proyectos desde el interspace.
+      </p>
+     </div>
+    </div>
+    <div class="masonry" id="gallery">
+    </div>
+    <div class="center-action">
+     <button class="btn ghost" hidden="" id="viewMoreCreations" type="button">
+      Ver más creaciones ↓
+     </button>
+    </div>
+   </section>
+   <section class="section reveal" id="shop">
+    <div class="section-head">
+     <p class="eyebrow" data-i18n="shopKicker">
+      SHOP
+     </p>
+     <h2 data-i18n="shopTitle">
+      Recursos para tu propio mundo.
+     </h2>
+     <p class="muted" data-i18n="shopText">
+      Productos fijos en Etsy y VGen. Algunas fichas tendrán una opción de personalización aparte.
+     </p>
+    </div>
+    <div class="shop-filters">
+     <button class="filter active" data-filter="all" data-i18n="filterAll">
+      Todo
+     </button>
+     <button class="filter" data-filter="stream" data-i18n="filterStream">
+      Stream
+     </button>
+     <button class="filter" data-filter="planning" data-i18n="filterPlanning">
+      Planning
+     </button>
+     <button class="filter" data-filter="study" data-i18n="filterStudy">
+      Estudio
+     </button>
+    </div>
+    <div class="product-grid" id="products">
+    </div>
+   </section>
+   <section class="section reveal" id="commissions">
+    <div class="section-head">
+     <p class="eyebrow" data-i18n="commissionKicker">
+      COMMISSIONS
+     </p>
+     <h2 data-i18n="commissionTitle">
+      Dos espacios cada mes.
+     </h2>
+     <p class="muted" data-i18n="commissionText">
+      Consulta aquí los días que están abiertos, reservados o cerrados.
+     </p>
+    </div>
+    <div class="calendar-card">
+     <div class="calendar-top">
+      <button id="prevMonth">
+       ‹
+      </button>
+      <h3 id="calendarTitle">
+      </h3>
+      <button id="nextMonth">
+       ›
+      </button>
+     </div>
+     <div class="calendar-week">
+      <span>
+       LUN
+      </span>
+      <span>
+       MAR
+      </span>
+      <span>
+       MIÉ
+      </span>
+      <span>
+       JUE
+      </span>
+      <span>
+       VIE
+      </span>
+      <span>
+       SÁB
+      </span>
+      <span>
+       DOM
+      </span>
+     </div>
+     <div class="calendar-grid" id="calendarGrid">
+     </div>
+     <div class="legend">
+      <span>
+       <i class="open">
+       </i>
+       OPEN
+      </span>
+      <span>
+       <i class="reserved">
+       </i>
+       RESERVED
+      </span>
+      <span>
+       <i class="closed">
+       </i>
+       CLOSED
+      </span>
+     </div>
+    </div>
+    <div class="support-grid">
+     <article class="support-card">
+      <span class="card-icon">
+       ✦
+      </span>
+      <h3 data-i18n="commissionCardTitle">
+       Comisiona conmigo
+      </h3>
+      <p data-i18n="commissionCardText">
+       Emotes chibi custom y otros encargos disponibles según calendario.
+      </p>
+      <a class="btn primary" data-link="vgen" href="#">
+       VGen ↗
+      </a>
+     </article>
+     <article class="support-card">
+      <span class="card-icon">
+       ♡
+      </span>
+      <h3 data-i18n="supportCardTitle">
+       Support SkyNatt
+      </h3>
+      <p data-i18n="supportCardText">
+       VGen, Etsy, Ko-fi y wishlist para apoyar el proyecto.
+      </p>
+      <div class="mini-links">
+       <a data-link="vgen" href="#">
+        VGen
+       </a>
+       <a data-link="etsy" href="#">
+        Etsy
+       </a>
+       <a data-link="kofi" href="#">
+        Ko-fi
+       </a>
+       <a data-link="wishlist" href="#">
+        Wishlist
+       </a>
+      </div>
+     </article>
+    </div>
+   </section>
+   <section class="section compact reveal" id="stream">
+    <div class="section-head row-head">
+     <div>
+      <p class="eyebrow" data-i18n="streamKicker">
+       STREAM
+      </p>
+      <h2 data-i18n="streamTitle">
+       En directo.
+      </h2>
+     </div>
+     <a class="btn ghost" data-i18n="moreStudio" href="studio.html#stream">
+      Ver más
+     </a>
+    </div>
+    <div class="stream-grid">
+     <article class="stream-card">
+      <span class="stream-dot">
+      </span>
+      <div>
+       <small data-i18n="lastStream">
+        ÚLTIMO DIRECTO
+       </small>
+       <h3 id="lastStreamTitle">
+       </h3>
+       <p id="lastStreamText">
+       </p>
+      </div>
+      <a class="btn ghost" data-link="twitch" href="#">
+       Twitch ↗
+      </a>
+     </article>
+     <article class="stream-card">
+      <span class="calendar-icon">
+       ◷
+      </span>
+      <div>
+       <small data-i18n="nextStream">
+        PRÓXIMO STREAM
+       </small>
+       <h3 id="nextStreamTitle">
+       </h3>
+       <p id="nextStreamText">
+       </p>
+      </div>
+     </article>
+    </div>
+   </section>
+   <section class="section compact reveal" id="testimonials">
+    <div class="section-head row-head">
+     <div>
+      <p class="eyebrow" data-i18n="testKicker">
+       TESTIMONIOS
+      </p>
+      <h2 data-i18n="testTitle">
+       Lo que dicen.
+      </h2>
+      <p class="muted" data-i18n="testText">
+       Solo aparecen comentarios que SkyNatt haya aprobado.
+      </p>
+     </div>
+     <a class="btn ghost" data-i18n="moreStudio" href="studio.html#testimonials">
+      Ver más
+     </a>
+    </div>
+    <div class="testimonial-grid" id="testimonialsList">
+    </div>
+   </section>
+   <section class="section compact reveal" id="community">
+    <div class="section-head">
+     <p class="eyebrow" data-i18n="communityKicker">
+      COMUNIDAD
+     </p>
+     <h2 data-i18n="communityTitle">
+      Tu rincón dentro de SkyNatt.
+     </h2>
+     <p class="muted" data-i18n="communityText">
+      Todo lo que necesitas para participar, guardar tus compras y conocer un poco más del proyecto.
+     </p>
+    </div>
+    <div class="community-grid">
+     <a class="community-link" href="studio.html#guestbook">
+      <span>
+       💬
+      </span>
+      <div>
+       <b data-i18n="communityGuest">
+        Guestbook
+       </b>
+       <small data-i18n="communityGuestText">
+        Deja un mensaje para SkyNatt.
+       </small>
+      </div>
+      <strong>
+       ↗
+      </strong>
+     </a>
+     <a class="community-link" href="account.html">
+      <span>
+       ♡
+      </span>
+      <div>
+       <b data-i18n="communityAccount">
+        Mi cuenta
+       </b>
+       <small data-i18n="communityAccountText">
+        Crea o inicia sesión cuando quieras.
+       </small>
+      </div>
+      <strong>
+       ↗
+      </strong>
+     </a>
+     <a class="community-link" href="downloads.html">
+      <span>
+       ✦
+      </span>
+      <div>
+       <b data-i18n="communityDownloads">
+        Mis descargas
+       </b>
+       <small data-i18n="communityDownloadsText">
+        Accede a tus productos y herramientas.
+       </small>
+      </div>
+      <strong>
+       ↗
+      </strong>
+     </a>
+     <a class="community-link" href="customizer.html">
+      <span>
+       🎨
+      </span>
+      <div>
+       <b data-i18n="communityCustomizer">
+        Personalización
+       </b>
+       <small data-i18n="communityCustomizerText">
+        Agenda y recursos personalizables · Coming soon.
+       </small>
+      </div>
+      <strong>
+       ↗
+      </strong>
+     </a>
+     <a class="community-link" href="terms.html">
+      <span>
+       📜
+      </span>
+      <div>
+       <b data-i18n="communityTerms">
+        Términos y reglas
+       </b>
+       <small data-i18n="communityTermsText">
+        Consulta las condiciones antes de comprar.
+       </small>
+      </div>
+      <strong>
+       ↗
+      </strong>
+     </a>
+     <a class="community-link" href="studio.html#setup">
+      <span>
+       💻
+      </span>
+      <div>
+       <b data-i18n="communitySetup">
+        My Setup
+       </b>
+       <small data-i18n="communitySetupText">
+        Conoce las herramientas que uso para crear.
+       </small>
+      </div>
+      <strong>
+       ↗
+      </strong>
+     </a>
+    </div>
+   </section>
+  </main>
+  <footer>
+   <div>
+    <b>
+     SKYNATT
+    </b>
+    <span>
+     ✦ A little world between stars
+    </span>
+   </div>
+   <div class="footer-links">
+    <a data-i18n="footerStudio" href="studio.html">
+     Studio
+    </a>
+    <a data-i18n="footerTerms" href="terms.html">
+     Términos
+    </a>
+    <a data-i18n="footerAccount" href="account.html">
+     Cuenta
+    </a>
+    <a data-i18n="footerDownloads" href="downloads.html">
+     Descargas
+    </a>
+   </div>
+  </footer>
+  <div class="easter" id="easter">
+   <img alt="" src="assets/easter.png"/>
+   <span class="easter-message">
+    you found me ✦
+   </span>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+  </script>
+  <script src="config.js">
+  </script>
+  <script src="script.js">
+  </script>
+ </body>
+</html>

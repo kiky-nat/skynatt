@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   SkyNatt — Admin
+  </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Fredoka:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body class="subpage admin-page">
+  <header class="nav">
+   <a class="brand" href="index.html">
+    <img src="assets/logo.svg"/>
+    <span>
+     SKYNATT ADMIN
+    </span>
+   </a>
+   <div class="nav-actions">
+    <button id="lang">
+     EN
+    </button>
+    <button id="theme">
+     ☾
+    </button>
+   </div>
+  </header>
+  <main class="page-wrap admin-wrap">
+   <section class="page-hero">
+    <p class="eyebrow">
+     PRIVATE STUDIO
+    </p>
+    <h1 data-i18n="adminTitle">
+     Tu panel de control.
+    </h1>
+    <p data-i18n="adminText">
+     Gestiona calendario, Guestbook, testimonios y datos de la web desde un solo lugar.
+    </p>
+   </section>
+   <div class="admin-warning" id="adminMode">
+   </div>
+   <div class="admin-grid">
+    <aside class="admin-sidebar">
+     <button class="admin-tab active" data-panel="overview">
+      📊
+      <span data-i18n="adminOverview">
+       Resumen
+      </span>
+     </button>
+     <button class="admin-tab" data-panel="calendar">
+      📅
+      <span data-i18n="adminCalendar">
+       Calendario
+      </span>
+     </button>
+     <button class="admin-tab" data-panel="guestbook">
+      💬
+      <span data-i18n="adminGuestbook">
+       Guestbook
+      </span>
+     </button>
+     <button class="admin-tab" data-panel="testimonials">
+      ⭐
+      <span data-i18n="adminTestimonials">
+       Testimonios
+      </span>
+     </button>
+     <button class="admin-tab" data-panel="creations">
+      🎨
+      <span>
+       Creaciones
+      </span>
+     </button>
+     <button class="admin-tab" data-panel="resources">
+      🛍️
+      <span>
+       Recursos
+      </span>
+     </button>
+     <button class="admin-tab" data-panel="content">
+      📝
+      <span data-i18n="adminContent">
+       Contenido
+      </span>
+     </button>
+     <button class="admin-tab" data-panel="integrations">
+      🔗
+      <span data-i18n="adminIntegrations">
+       Conexiones
+      </span>
+     </button>
+    </aside>
+    <div class="admin-content">
+     <section class="admin-panel active" data-panel-view="overview">
+      <div class="stats-grid">
+       <article>
+        <small>
+         PAGE VIEWS
+        </small>
+        <b id="statViews">
+         0
+        </b>
+       </article>
+       <article>
+        <small>
+         INTERACTIONS
+        </small>
+        <b id="statInteractions">
+         0
+        </b>
+       </article>
+       <article>
+        <small>
+         GUESTBOOK
+        </small>
+        <b id="statGuests">
+         0
+        </b>
+       </article>
+       <article>
+        <small>
+         APPROVED TESTIMONIALS
+        </small>
+        <b id="statTestimonials">
+         0
+        </b>
+       </article>
+      </div>
+      <div class="admin-card">
+       <h2 data-i18n="adminQuick">
+        Acciones rápidas
+       </h2>
+       <div class="quick-actions">
+        <button class="btn primary" data-i18n="adminOpenCalendar" data-jump="calendar">
+         Abrir calendario
+        </button>
+        <button class="btn ghost" data-i18n="adminModerate" data-jump="guestbook">
+         Moderar mensajes
+        </button>
+        <button class="btn ghost" data-i18n="adminManageTestimonials" data-jump="testimonials">
+         Gestionar testimonios
+        </button>
+       </div>
+      </div>
+      <div class="admin-card">
+       <h2 data-i18n="adminPublicMode">
+        Modo público / local
+       </h2>
+       <p id="syncInfo">
+       </p>
+      </div>
+     </section>
+     <section class="admin-panel" data-panel-view="calendar">
+      <div class="admin-card">
+       <div class="admin-card-head">
+        <div>
+         <p class="eyebrow">
+          COMMISSION CALENDAR
+         </p>
+         <h2>
+          Marca cada día
+         </h2>
+        </div>
+        <div>
+         <button class="icon-btn" id="adminPrevMonth">
+          ‹
+         </button>
+         <button class="icon-btn" id="adminNextMonth">
+          ›
+         </button>
+        </div>
+       </div>
+       <h3 id="adminCalendarTitle">
+       </h3>
+       <div class="calendar-week">
+        <span>
+         LUN
+        </span>
+        <span>
+         MAR
+        </span>
+        <span>
+         MIÉ
+        </span>
+        <span>
+         JUE
+        </span>
+        <span>
+         VIE
+        </span>
+        <span>
+         SÁB
+        </span>
+        <span>
+         DOM
+        </span>
+       </div>
+       <div class="calendar-grid admin-calendar" id="adminCalendarGrid">
+       </div>
+       <p class="form-note">
+        Haz clic en un día para alternar OPEN → RESERVED → CLOSED. Los cambios locales se guardan en este navegador; con Supabase configurado se guardan para todos.
+       </p>
+      </div>
+     </section>
+     <section class="admin-panel" data-panel-view="guestbook">
+      <div class="admin-card">
+       <div class="admin-card-head">
+        <div>
+         <p class="eyebrow">
+          GUESTBOOK
+         </p>
+         <h2>
+          Moderación
+         </h2>
+        </div>
+        <button class="btn ghost" id="refreshGuests">
+         Refresh
+        </button>
+       </div>
+       <div id="adminGuests">
+       </div>
+      </div>
+     </section>
+     <section class="admin-panel" data-panel-view="testimonials">
+      <div class="admin-card">
+       <div class="admin-card-head">
+        <div>
+         <p class="eyebrow">
+          TESTIMONIALS
+         </p>
+         <h2>
+          Añade los que quieras destacar
+         </h2>
+        </div>
+       </div>
+       <form class="admin-form" id="testimonialForm">
+        <input name="name" placeholder="Nombre / alias" required=""/>
+        <input name="source" placeholder="VGen / Etsy / Other"/>
+        <input name="commission" placeholder="Producto o comisión"/>
+        <textarea name="message" placeholder="Mensaje del cliente" required=""></textarea>
+        <button class="btn primary">
+         Añadir aprobado
+        </button>
+       </form>
+       <div id="adminTestimonials">
+       </div>
+      </div>
+     </section>
+     <section class="admin-panel" data-panel-view="creations">
+      <div class="admin-card">
+       <div class="admin-card-head">
+        <div>
+         <p class="eyebrow">
+          CREATIONS
+         </p>
+         <h2>
+          Gestiona tu galería
+         </h2>
+         <p class="muted">
+          Añade, edita, oculta o elimina trabajos sin tocar el código.
+         </p>
+        </div>
+       </div>
+       <form class="admin-form content-form" id="creationForm">
+        <input name="id" type="hidden"/>
+        <label>
+         Título (ES)
+         <input name="titleEs" required=""/>
+        </label>
+        <label>
+         Título (EN)
+         <input name="titleEn"/>
+        </label>
+        <label>
+         Imagen / URL
+         <input name="src" placeholder="assets/gallery/mi-dibujo.png" required=""/>
+        </label>
+        <label>
+         Subir imagen
+         <input accept="image/png,image/jpeg,image/webp,image/gif" name="imageFile" type="file"/>
+        </label>
+        <label>
+         Alt / descripción
+         <input name="alt"/>
+        </label>
+        <label>
+         Tags
+         <span class="form-note">
+          separados por comas
+         </span>
+         <input name="tags" placeholder="illustration, vtuber, fanart"/>
+        </label>
+        <label class="check">
+         <input checked="" name="visible" type="checkbox"/>
+         <span>
+          Mostrar públicamente
+         </span>
+        </label>
+        <div class="integration-actions">
+         <button class="btn primary" type="submit">
+          Guardar creación
+         </button>
+         <button class="btn ghost" id="creationReset" type="button">
+          Nueva
+         </button>
+        </div>
+       </form>
+       <div id="adminCreations">
+       </div>
+      </div>
+     </section>
+     <section class="admin-panel" data-panel-view="resources">
+      <div class="admin-card">
+       <div class="admin-card-head">
+        <div>
+         <p class="eyebrow">
+          RESOURCES / SHOP
+         </p>
+         <h2>
+          Gestiona tus productos
+         </h2>
+         <p class="muted">
+          Crea o elimina recursos, cambia nombres, imágenes, tags y enlaces de VGen/Etsy.
+         </p>
+        </div>
+       </div>
+       <form class="admin-form content-form" id="resourceForm">
+        <input name="id" type="hidden"/>
+        <label>
+         Nombre (ES)
+         <input name="nameEs" required=""/>
+        </label>
+        <label>
+         Name (EN)
+         <input name="nameEn"/>
+        </label>
+        <label>
+         Categoría
+         <select name="cat">
+          <option value="stream">
+           Stream
+          </option>
+          <option value="planning">
+           Planning
+          </option>
+          <option value="study">
+           Study
+          </option>
+          <option value="other">
+           Other
+          </option>
+         </select>
+        </label>
+        <label>
+         Descripción (ES)
+         <textarea name="descEs"></textarea>
+        </label>
+        <label>
+         Description (EN)
+         <textarea name="descEn"></textarea>
+        </label>
+        <label>
+         Imagen / URL
+         <input name="image" placeholder="assets/products/product.png" required=""/>
+        </label>
+        <label>
+         Subir imagen
+         <input accept="image/png,image/jpeg,image/webp,image/gif" name="imageFile" type="file"/>
+        </label>
+        <label>
+         VGen
+         <input name="vgen" placeholder="https://vgen.co/..." type="url"/>
+        </label>
+        <label>
+         Etsy
+         <input name="etsy" placeholder="https://www.etsy.com/listing/..." type="url"/>
+        </label>
+        <label>
+         Tags
+         <span class="form-note">
+          separados por comas
+         </span>
+         <input name="tags" placeholder="planner, student, notion"/>
+        </label>
+        <label class="check">
+         <input checked="" name="visible" type="checkbox"/>
+         <span>
+          Mostrar públicamente
+         </span>
+        </label>
+        <label class="check">
+         <input name="customizable" type="checkbox"/>
+         <span>
+          Mostrar botón de personalización
+         </span>
+        </label>
+        <div class="integration-actions">
+         <button class="btn primary" type="submit">
+          Guardar recurso
+         </button>
+         <button class="btn ghost" id="resourceReset" type="button">
+          Nuevo
+         </button>
+        </div>
+       </form>
+       <div id="adminResources">
+       </div>
+      </div>
+     </section>
+     <section class="admin-panel" data-panel-view="purchases">
+      <div class="admin-card">
+       <div class="admin-card-head">
+        <div>
+         <p class="eyebrow">
+          PURCHASES
+         </p>
+         <h2>
+          Vincula compras reales
+         </h2>
+         <p class="muted">
+          Importa un pedido verificado de Etsy, VGen o de forma manual. Si el correo coincide con una cuenta, la compra se vincula automáticamente.
+         </p>
+        </div>
+       </div>
+       <form class="admin-form content-form" id="purchaseAdminForm">
+        <label>
+         Plataforma
+         <select name="source">
+          <option value="etsy">
+           Etsy
+          </option>
+          <option value="vgen">
+           VGen
+          </option>
+          <option value="manual">
+           Manual
+          </option>
+         </select>
+        </label>
+        <label>
+         Número de pedido
+         <input name="orderId" placeholder="ORDER-12345" required=""/>
+        </label>
+        <label>
+         Correo de compra
+         <input name="buyerEmail" placeholder="cliente@example.com" type="email"/>
+        </label>
+        <label>
+         Producto comprado
+         <input name="productName" required=""/>
+        </label>
+        <label>
+         Descripción
+         <textarea name="description"></textarea>
+        </label>
+        <label>
+         Enlace de descarga
+         <input name="downloadUrl" placeholder="https://..." type="url"/>
+        </label>
+        <label class="check">
+         <input checked="" name="verified" type="checkbox"/>
+         <span>
+          Compra verificada
+         </span>
+        </label>
+        <button class="btn primary" type="submit">
+         Guardar compra
+        </button>
+       </form>
+       <p class="form-note" id="purchaseAdminStatus">
+       </p>
+      </div>
+      <div class="admin-card">
+       <h2>
+        Últimas compras
+       </h2>
+       <div id="adminPurchases">
+       </div>
+      </div>
+     </section>
+     <section class="admin-panel" data-panel-view="content">
+      <div class="admin-card">
+       <p class="eyebrow">
+        STREAM FALLBACK
+       </p>
+       <h2>
+        Último / próximo stream
+       </h2>
+       <form class="admin-form" id="streamForm">
+        <input name="lastTitle" placeholder="Último directo">
+         <input name="lastText" placeholder="Texto último directo">
+          <input name="nextTitle" placeholder="Próximo stream">
+           <input name="nextText" placeholder="Texto próximo stream">
+            <button class="btn primary">
+             Guardar
+            </button>
+           </input>
+          </input>
+         </input>
+        </input>
+       </form>
+      </div>
+      <div class="admin-card">
+       <p class="eyebrow">
+        PUBLIC LINKS
+       </p>
+       <h2>
+        Enlaces públicos
+       </h2>
+       <form class="admin-form" id="publicLinksForm">
+        <label>
+         VGen
+         <input name="vgen" type="url">
+         </input>
+        </label>
+        <label>
+         Etsy
+         <input name="etsy" type="url"/>
+        </label>
+        <label>
+         Ko-fi
+         <input name="kofi" type="url"/>
+        </label>
+        <label>
+         Wishlist
+         <input name="wishlist" type="url"/>
+        </label>
+        <label>
+         Twitch
+         <input name="twitch" type="url"/>
+        </label>
+        <label>
+         Instagram
+         <input name="instagram" type="url"/>
+        </label>
+        <label>
+         X / Twitter
+         <input name="twitter" type="url"/>
+        </label>
+        <label>
+         Discord
+         <input name="discord" type="url"/>
+        </label>
+        <label>
+         Endpoint público de Twitch
+         <input name="twitchEndpoint" placeholder="https://tu-endpoint.example/twitch" type="url"/>
+        </label>
+        <button class="btn primary" type="submit">
+         Guardar enlaces
+        </button>
+       </form>
+      </div>
+      <div class="admin-card">
+       <p class="eyebrow">
+        SOCIAL POSTS
+       </p>
+       <h2>
+        Últimos posts
+       </h2>
+       <p class="muted">
+        Puedes dejar hasta 6 tarjetas. No se necesita API de redes.
+       </p>
+       <form class="admin-form" id="socialPostsForm">
+        <div id="socialPostFields">
+        </div>
+        <button class="btn primary" type="submit">
+         Guardar posts
+        </button>
+       </form>
+      </div>
+      <div class="admin-card">
+       <p class="eyebrow">
+        ANALYTICS
+       </p>
+       <h2>
+        Datos clave
+       </h2>
+       <p>
+        El contador incluido funciona sin cookies usando almacenamiento local. Para datos globales de todos los visitantes, conecta Supabase o una herramienta de analítica externa en producción.
+       </p>
+       <button class="btn ghost" id="resetAnalytics">
+        Reset local analytics
+       </button>
+      </div>
+     </section>
+     <section class="admin-panel" data-panel-view="integrations">
+      <div class="admin-card">
+       <div class="admin-card-head">
+        <div>
+         <p class="eyebrow">
+          CONNECTIONS
+         </p>
+         <h2 data-i18n="adminIntegrationsTitle">
+          Vincula tus plataformas
+         </h2>
+         <p class="muted" data-i18n="adminIntegrationsText">
+          Guarda aquí las conexiones que utiliza la web. Las claves privadas nunca deben ponerse en este HTML.
+         </p>
+        </div>
+       </div>
+       <div class="integration-grid">
+        <form class="integration-card" id="twitchConnectForm">
+         <span class="card-icon">
+          📺
+         </span>
+         <h3>
+          Twitch
+         </h3>
+         <label>
+          Channel URL
+          <input name="twitchUrl" placeholder="https://www.twitch.tv/SkyNatt" type="url"/>
+         </label>
+         <label>
+          Automatic data endpoint
+          <input name="twitchEndpoint" placeholder="https://tu-backend.example/twitch" type="url"/>
+         </label>
+         <div class="integration-actions">
+          <button class="btn primary" data-i18n="connectSave">
+           Vincular / guardar
+          </button>
+          <a class="btn ghost" id="twitchOpen" target="_blank">
+           Abrir canal
+          </a>
+         </div>
+         <p class="form-note" id="twitchStatus">
+         </p>
+        </form>
+        <form class="integration-card" id="etsyConnectForm">
+         <span class="card-icon">
+          🛍️
+         </span>
+         <h3>
+          Etsy
+         </h3>
+         <label>
+          Shop URL
+          <input name="etsyUrl" placeholder="https://www.etsy.com/shop/SkyNatt" type="url"/>
+         </label>
+         <label>
+          Purchase import webhook
+          <input name="etsyWebhook" placeholder="https://tu-backend.example/etsy" type="url"/>
+         </label>
+         <div class="integration-actions">
+          <button class="btn primary" data-i18n="connectSave">
+           Vincular / guardar
+          </button>
+          <a class="btn ghost" id="etsyOpen" target="_blank">
+           Abrir tienda
+          </a>
+         </div>
+         <p class="form-note" id="etsyStatus">
+         </p>
+        </form>
+       </div>
+       <div class="admin-card inset-card">
+        <p class="eyebrow">
+         VGEN
+        </p>
+        <h3>
+         VGen
+        </h3>
+        <label>
+         Store / commission URL
+         <input id="vgenUrl" placeholder="https://vgen.co/SkyNatt" type="url"/>
+        </label>
+        <button class="btn primary" data-i18n="connectSave" id="saveVgen">
+         Guardar VGen
+        </button>
+        <p class="form-note" id="vgenStatus">
+        </p>
+       </div>
+      </div>
+     </section>
+    </div>
+   </div>
+  </main>
+  <footer>
+   <div>
+    <b>
+     SKYNATT ADMIN
+    </b>
+    <span>
+     ✦ Private control room
+    </span>
+   </div>
+   <div class="footer-links">
+    <a href="index.html">
+     Public site
+    </a>
+    <a href="terms.html">
+     Terms
+    </a>
+   </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+  </script>
+  <script src="config.js">
+  </script>
+  <script src="script.js">
+  </script>
+ </body>
+</html>
