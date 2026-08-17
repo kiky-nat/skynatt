@@ -11,7 +11,7 @@ window.SKY_CONFIG = {
     twitterArt: 'https://x.com/SkyNattArts',
     twitter: 'https://x.com/SkyNattArts',
     instagram: 'https://www.instagram.com/bannednata/?hl=es',
-    discord: ''
+    discord: 'https://discord.gg/E8DWaKjahK'
   },
   assets: {
     hero: 'assets/hero-pose.png',
