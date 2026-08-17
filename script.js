@@ -36,7 +36,7 @@
       accountKicker:'CUENTA',accountTitle:'Tu espacio personal.',accountText:'La cuenta es opcional. Puedes crearla con un usuario, correo y contraseña, sin pedirte datos personales innecesarios.',createAccountTab:'Crear cuenta',loginAccountTab:'Iniciar sesión',profileTab:'Mi perfil',usernameLabel:'Usuario',emailLabel:'Correo electrónico',passwordLabel:'Contraseña',createAccount:'Crear cuenta',loginAccount:'Iniciar sesión',logout:'Cerrar sesión',goDownloads:'Ir a mis descargas',loggedInAs:'CONECTADO COMO',accountPrivacy:'No necesitas introducir nombre real, dirección, teléfono ni otros datos que no sean necesarios para tu cuenta.',
       purchaseTitle:'Mis productos',demoBadge:'PREPARADO',purchaseNote:'Las compras de Etsy/VGen no se importan automáticamente desde el navegador. Cuando exista una integración autorizada, los productos podrán asignarse aquí.',
       termsTitle:'Términos de Servicio',termsIntro:'Actualizados el 06/12/2025 · Esta página puede actualizarse antes de futuras compras o encargos.',comingTitle:'Personalización, próximamente.',comingText:'La tienda seguirá siendo fija en VGen/Etsy. Cuando un producto tenga personalización, su botón te traerá aquí para configurar tu versión.',comingBadge:'COMING SOON',comingDetails:'La estructura está preparada para agendas, Notion, GoodNotes y otros productos. Esta parte se desarrollará aparte para que sea una experiencia completa.',backShop:'Volver a la tienda',
-      adminTitle:'Tu panel de control.',adminText:'Gestiona calendario, Guestbook, testimonios, creaciones, recursos e integraciones desde un solo lugar.',adminQuick:'Acciones rápidas',adminOverview:'Resumen',adminCalendar:'Calendario',adminGuestbook:'Guestbook',adminTestimonials:'Testimonios',adminContent:'Contenido',adminIntegrations:'Conexiones',adminOpenCalendar:'Abrir calendario',adminModerate:'Moderar mensajes',adminManageTestimonials:'Gestionar testimonios',adminPublicMode:'Estado de conexión',
+      adminPurchases:'Compras',adminTitle:'Tu panel de control.',adminText:'Gestiona calendario, Guestbook, testimonios, creaciones, recursos e integraciones desde un solo lugar.',adminQuick:'Acciones rápidas',adminOverview:'Resumen',adminCalendar:'Calendario',adminGuestbook:'Guestbook',adminTestimonials:'Testimonios',adminContent:'Contenido',adminIntegrations:'Conexiones',adminOpenCalendar:'Abrir calendario',adminModerate:'Moderar mensajes',adminManageTestimonials:'Gestionar testimonios',adminPublicMode:'Estado de conexión',
       authRequired:'Inicia sesión con tu cuenta de Admin para entrar.',notAdmin:'Esta cuenta no tiene permisos de administración.',supabaseReady:'Supabase conectado · datos compartidos',localMode:'Modo local · los cambios solo afectan a este navegador',save:'Guardar',delete:'Eliminar',edit:'Editar',newItem:'Nuevo',approved:'Aprobado',pending:'Pendiente',connected:'Conectado',notConnected:'No conectado',saved:'Guardado correctamente.',deleted:'Eliminado.',error:'Ha ocurrido un error.',
       egg1:'you found me ✦',egg2:'the interspace was hiding here',egg3:'a little secret for curious stars',egg4:'✨ thanks for exploring',egg5:'you found the fifth message ✧'
     },
@@ -53,7 +53,7 @@
       accountKicker:'ACCOUNT',accountTitle:'Your personal space.',accountText:'An account is optional. Create one with a username, email and password without unnecessary personal information.',createAccountTab:'Create account',loginAccountTab:'Sign in',profileTab:'My profile',usernameLabel:'Username',emailLabel:'Email',passwordLabel:'Password',createAccount:'Create account',loginAccount:'Sign in',logout:'Sign out',goDownloads:'Go to my downloads',loggedInAs:'SIGNED IN AS',accountPrivacy:'You do not need to provide your real name, address, phone number or other unnecessary personal information.',
       purchaseTitle:'My products',demoBadge:'READY',purchaseNote:'Etsy/VGen purchases are not imported automatically by the browser. When an authorized integration exists, purchases can be assigned here.',
       termsTitle:'Terms of Service',termsIntro:'Updated 06/12/2025 · This page may be updated before future purchases or commissions.',comingTitle:'Customization, coming soon.',comingText:'The shop stays fixed on VGen/Etsy. When a product supports customization, its button will bring you here to configure your version.',comingBadge:'COMING SOON',comingDetails:'The structure is ready for planners, Notion, GoodNotes and other products. This part will be developed separately as a complete experience.',backShop:'Back to shop',
-      adminTitle:'Your control panel.',adminText:'Manage the calendar, Guestbook, testimonials, creations, resources and integrations from one place.',adminQuick:'Quick actions',adminOverview:'Overview',adminCalendar:'Calendar',adminGuestbook:'Guestbook',adminTestimonials:'Testimonials',adminContent:'Content',adminIntegrations:'Integrations',adminOpenCalendar:'Open calendar',adminModerate:'Moderate messages',adminManageTestimonials:'Manage testimonials',adminPublicMode:'Connection status',
+      adminPurchases:'Purchases',adminTitle:'Your control panel.',adminText:'Manage the calendar, Guestbook, testimonials, creations, resources and integrations from one place.',adminQuick:'Quick actions',adminOverview:'Overview',adminCalendar:'Calendar',adminGuestbook:'Guestbook',adminTestimonials:'Testimonials',adminContent:'Content',adminIntegrations:'Integrations',adminOpenCalendar:'Open calendar',adminModerate:'Moderate messages',adminManageTestimonials:'Manage testimonials',adminPublicMode:'Connection status',
       authRequired:'Sign in with your Admin account to enter.',notAdmin:'This account does not have administrator permissions.',supabaseReady:'Supabase connected · shared data',localMode:'Local mode · changes affect this browser only',save:'Save',delete:'Delete',edit:'Edit',newItem:'New',approved:'Approved',pending:'Pending',connected:'Connected',notConnected:'Not connected',saved:'Saved successfully.',deleted:'Deleted.',error:'Something went wrong.',
       egg1:'you found me ✦',egg2:'the interspace was hiding here',egg3:'a little secret for curious stars',egg4:'✨ thanks for exploring',egg5:'you found the fifth message ✧'
     }
@@ -179,10 +179,32 @@
     const b=$('#theme'); if(b) b.textContent=dark?'☀':'☾';
   }
   function applyLang() {
-    document.documentElement.lang=lang;
-    $$('[data-i18n]').forEach(el => { const k=el.dataset.i18n; if(T[lang][k]!==undefined) el.innerHTML=T[lang][k]; });
-    const l=$('#lang'); if(l) l.textContent=lang==='es'?'EN':'ES';
+    document.documentElement.lang = lang;
+
+    $$('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (T[lang][key] !== undefined) {
+        el.innerHTML = T[lang][key];
+      }
+    });
+
+    const languageButton = $('#lang');
+    if (languageButton) {
+      languageButton.textContent = lang === 'es' ? 'EN' : 'ES';
+    }
+
+    renderTermsLanguage();
     applyTheme();
+  }
+
+  function renderTermsLanguage() {
+    const target = $('#termsContent');
+    if (!target) return;
+
+    const template = $(`#terms${lang === 'es' ? 'ES' : 'EN'}`);
+    if (!template) return;
+
+    target.innerHTML = template.innerHTML;
   }
   function wireBasic() {
     $('#lang')?.addEventListener('click',()=>{lang=lang==='es'?'en':'es';localStorage.setItem(LANG_KEY,lang);applyLang();renderAll().catch(console.error);});
@@ -338,21 +360,172 @@
   async function renderAll(){const data=await loadPublicData();renderGallery(data);renderProducts(data);renderCalendar(data);renderStreams(data);renderTestimonials(data);renderSetup(data);renderSocial(data);renderGuestbook(data);wireLinks(data);return data;}
   function wireLinks(data=baseData()){$$('[data-link]').forEach(a=>{const u=data.links?.[a.dataset.link]||CFG.links?.[a.dataset.link]||'#';if(u&&u!=='#')a.href=safeUrl(u);});}
 
-  async function setupAccount(){const create=$('#createAccountForm'),login=$('#loginForm');if(!create&&!login)return;const profilePane=$('#profilePane');
-    const setTab=t=>{$$('.account-tabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));$('#createPane')&&( $('#createPane').hidden=t!=='create');$('#loginPane')&&( $('#loginPane').hidden=t!=='login');if(profilePane)profilePane.hidden=t!=='profile';};
-    $$('.account-tabs button').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
-    if(initDb()){
-      const {data:{session}}=await db.auth.getSession();renderAuthProfile(session);db.auth.onAuthStateChange((_e,s)=>renderAuthProfile(s));
-      create?.addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(create);try{const email=String(f.get('email')).trim().toLowerCase(),password=String(f.get('password')),username=String(f.get('username')).trim();const {data,error}=await db.auth.signUp({email,password,options:{data:{username}}});if(error)throw error;if(data.user&&!data.session){$('#createStatus').textContent=lang==='es'?'Revisa tu correo para confirmar la cuenta.':'Check your email to confirm your account.';}else{$('#createStatus').textContent=text('saved');setTab('profile');}create.reset();}catch(err){$('#createStatus').textContent=err.message||text('error');}});
-      login?.addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(login);try{const {error}=await db.auth.signInWithPassword({email:String(f.get('email')).trim().toLowerCase(),password:String(f.get('password'))});if(error)throw error;setTab('profile');}catch(err){$('#loginStatus').textContent=err.message||text('error');}});
-      $('#logoutAccount')?.addEventListener('click',async()=>{await db.auth.signOut();setTab('login');});
-    } else {
-      create?.addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(create),a={username:String(f.get('username')).trim(),email:String(f.get('email')).trim().toLowerCase(),passwordHash:await hashPassword(String(f.get('password')))};saveLocal({account:a,session:{username:a.username,email:a.email}});$('#createStatus').textContent=lang==='es'?'Cuenta creada en este dispositivo.':'Account created on this device.';create.reset();setTab('profile');renderAuthProfile({local:true});});
-      login?.addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(login),d=baseData();if(d.account?.email===String(f.get('email')).trim().toLowerCase()&&d.account.passwordHash===await hashPassword(String(f.get('password')))){saveLocal({session:{username:d.account.username,email:d.account.email}});setTab('profile');renderAuthProfile({local:true});}else $('#loginStatus').textContent=lang==='es'?'Correo o contraseña incorrectos.':'Incorrect email or password.';});
-      $('#logoutAccount')?.addEventListener('click',()=>{saveLocal({session:null});setTab('login');renderAuthProfile(null);});
+  async function setupAccount() {
+    const create = $('#createAccountForm');
+    const login = $('#loginForm');
+    if (!create && !login) return;
+
+    const profilePane = $('#profilePane');
+    const createPane = $('#createPane');
+    const loginPane = $('#loginPane');
+    const profileTab = $('.account-tabs [data-tab="profile"]');
+    const createTab = $('.account-tabs [data-tab="create"]');
+    const loginTab = $('.account-tabs [data-tab="login"]');
+
+    const setTab = tab => {
+      $$('.account-tabs button').forEach(button => {
+        button.classList.toggle('active', button.dataset.tab === tab);
+      });
+
+      if (createPane) createPane.hidden = tab !== 'create';
+      if (loginPane) loginPane.hidden = tab !== 'login';
+      if (profilePane) profilePane.hidden = tab !== 'profile';
+    };
+
+    const setAuthenticatedUI = authenticated => {
+      if (profileTab) profileTab.hidden = !authenticated;
+      if (createTab) createTab.hidden = authenticated;
+      if (loginTab) loginTab.hidden = authenticated;
+
+      if (authenticated) {
+        setTab('profile');
+      } else {
+        setTab('login');
+      }
+    };
+
+    $$('.account-tabs button').forEach(button => {
+      button.addEventListener('click', () => setTab(button.dataset.tab));
+    });
+
+    const renderSession = session => {
+      renderAuthProfile(session);
+      setAuthenticatedUI(!!session);
+    };
+
+    if (initDb()) {
+      const { data: { session } } = await db.auth.getSession();
+      renderSession(session);
+
+      db.auth.onAuthStateChange((_event, nextSession) => {
+        renderSession(nextSession);
+      });
+
+      create?.addEventListener('submit', async event => {
+        event.preventDefault();
+        const form = new FormData(create);
+
+        try {
+          const email = String(form.get('email')).trim().toLowerCase();
+          const password = String(form.get('password'));
+          const username = String(form.get('username')).trim();
+
+          const { data, error } = await db.auth.signUp({
+            email,
+            password,
+            options: { data: { username } }
+          });
+
+          if (error) throw error;
+
+          if (data.user && !data.session) {
+            $('#createStatus').textContent = lang === 'es'
+              ? 'Revisa tu correo para confirmar la cuenta.'
+              : 'Check your email to confirm your account.';
+            return;
+          }
+
+          create.reset();
+          renderSession(data.session);
+        } catch (error) {
+          $('#createStatus').textContent = error.message || text('error');
+        }
+      });
+
+      login?.addEventListener('submit', async event => {
+        event.preventDefault();
+        const form = new FormData(login);
+
+        try {
+          const { data, error } = await db.auth.signInWithPassword({
+            email: String(form.get('email')).trim().toLowerCase(),
+            password: String(form.get('password'))
+          });
+
+          if (error) throw error;
+
+          renderSession(data.session);
+        } catch (error) {
+          $('#loginStatus').textContent = error.message || text('error');
+        }
+      });
+
+      $('#logoutAccount')?.addEventListener('click', async () => {
+        await db.auth.signOut();
+      });
+
+      return;
+    }
+
+    const localSession = baseData().session;
+    renderSession(localSession ? { local: true, ...localSession } : null);
+
+    create?.addEventListener('submit', async event => {
+      event.preventDefault();
+      const form = new FormData(create);
+      const account = {
+        username: String(form.get('username')).trim(),
+        email: String(form.get('email')).trim().toLowerCase(),
+        passwordHash: await hashPassword(String(form.get('password')))
+      };
+
+      saveLocal({
+        account,
+        session: { username: account.username, email: account.email }
+      });
+
+      create.reset();
+      renderSession({ local: true, ...account });
+      $('#createStatus').textContent = lang === 'es'
+        ? 'Cuenta creada en este dispositivo.'
+        : 'Account created on this device.';
+    });
+
+    login?.addEventListener('submit', async event => {
+      event.preventDefault();
+      const form = new FormData(login);
+      const data = baseData();
+      const email = String(form.get('email')).trim().toLowerCase();
+      const passwordHash = await hashPassword(String(form.get('password')));
+
+      if (data.account?.email === email && data.account.passwordHash === passwordHash) {
+        saveLocal({ session: { username: data.account.username, email } });
+        renderSession({ local: true, ...data.account });
+      } else {
+        $('#loginStatus').textContent = lang === 'es'
+          ? 'Correo o contraseña incorrectos.'
+          : 'Incorrect email or password.';
+      }
+    });
+
+    $('#logoutAccount')?.addEventListener('click', () => {
+      saveLocal({ session: null });
+      renderSession(null);
+    });
+  }
+
+  function renderAuthProfile(session) {
+    const user = session?.user || session;
+    const meta = user?.user_metadata || {};
+
+    if ($('#accountUsernameView')) {
+      $('#accountUsernameView').textContent = meta.username || user?.username || '—';
+    }
+
+    if ($('#accountEmailView')) {
+      $('#accountEmailView').textContent = user?.email || '—';
     }
   }
-  function renderAuthProfile(session){const user=session?.user||session;const meta=user?.user_metadata||{};if($('#accountUsernameView'))$('#accountUsernameView').textContent=meta.username||user?.username||'—';if($('#accountEmailView'))$('#accountEmailView').textContent=user?.email||'—';}
   async function hashPassword(value){const data=new TextEncoder().encode(value),buf=await crypto.subtle.digest('SHA-256',data);return [...new Uint8Array(buf)].map(x=>x.toString(16).padStart(2,'0')).join('');}
 
   async function setupDownloads() {
@@ -456,16 +629,56 @@
     );
   }
 
-  function adminGate(){const wrap=$('.admin-wrap');if(!wrap)return;let gate=$('#adminAuthGate');if(!gate){gate=document.createElement('div');gate.id='adminAuthGate';gate.className='admin-auth-gate';gate.innerHTML=`<div class="admin-card"><p class="eyebrow">PRIVATE STUDIO</p><h2>${text('authRequired')}</h2><p class="muted" id="adminAuthStatus"></p><form id="adminLoginForm" class="admin-form"><label>Email<input name="email" type="email" required></label><label>Password<input name="password" type="password" required></label><button class="btn primary">${text('loginAccount')}</button></form><a class="btn ghost" href="account.html">${lang==='es'?'Crear cuenta / Cuenta':'Create account / Account'}</a></div>`;wrap.prepend(gate);}
-    const grid=$('.admin-grid');if(grid)grid.hidden=true;return gate;
+  function adminGate() {
+    const wrap = $('.admin-wrap');
+    if (!wrap) return null;
+
+    let gate = $('#adminAuthGate');
+
+    if (!gate) {
+      gate = document.createElement('div');
+      gate.id = 'adminAuthGate';
+      gate.className = 'admin-auth-gate';
+      gate.innerHTML = `
+        <div class="admin-card admin-login-card">
+          <p class="eyebrow">PRIVATE STUDIO</p>
+          <h2>${text('authRequired')}</h2>
+          <p class="muted" id="adminAuthStatus"></p>
+          <form id="adminLoginForm" class="admin-form">
+            <label>
+              Email
+              <input name="email" type="email" autocomplete="username" required>
+            </label>
+            <label>
+              Password
+              <input name="password" type="password" autocomplete="current-password" required>
+            </label>
+            <button class="btn primary" type="submit">
+              ${text('loginAccount')}
+            </button>
+          </form>
+        </div>`;
+
+      wrap.prepend(gate);
+    }
+
+    $('.admin-page')?.classList.add('admin-locked');
+    return gate;
   }
+
   async function checkAdmin() {
     if (!$('.admin-page')) return true;
 
     const gate = adminGate();
+    const grid = $('.admin-grid');
+    const hero = $('.admin-wrap .page-hero');
+    const mode = $('#adminMode');
 
     if (!initDb()) {
       gate.hidden = false;
+      if (grid) grid.hidden = true;
+      if (hero) hero.hidden = true;
+      if (mode) mode.hidden = true;
       $('#adminAuthStatus').textContent = lang === 'es'
         ? 'Configura Supabase antes de utilizar el panel privado.'
         : 'Configure Supabase before using the private admin panel.';
@@ -476,6 +689,9 @@
 
     if (!session) {
       gate.hidden = false;
+      if (grid) grid.hidden = true;
+      if (hero) hero.hidden = true;
+      if (mode) mode.hidden = true;
       wireAdminLogin();
       return false;
     }
@@ -485,15 +701,23 @@
       if (error) throw error;
 
       if (!data) {
+        gate.hidden = false;
+        if (grid) grid.hidden = true;
+        if (hero) hero.hidden = true;
+        if (mode) mode.hidden = true;
         $('#adminAuthStatus').textContent = text('notAdmin');
+        await db.auth.signOut();
         return false;
       }
 
       adminUser = session.user;
       adminAllowed = true;
       gate.hidden = true;
-      $('.admin-grid').hidden = false;
-      $('#adminMode').textContent = text('supabaseReady');
+      $('.admin-page')?.classList.remove('admin-locked');
+      if (hero) hero.hidden = false;
+      if (mode) mode.hidden = false;
+      if (grid) grid.hidden = false;
+      if (mode) mode.textContent = text('supabaseReady');
       return true;
     } catch (error) {
       console.error(error);
@@ -501,7 +725,30 @@
       return false;
     }
   }
-  function wireAdminLogin(){const f=$('#adminLoginForm');if(!f||f.dataset.ready)return;f.dataset.ready='1';f.onsubmit=async e=>{e.preventDefault();if(!initDb())return;const d=new FormData(f);const {error}=await db.auth.signInWithPassword({email:String(d.get('email')).trim().toLowerCase(),password:String(d.get('password'))});if(error){$('#adminAuthStatus').textContent=error.message;return;}location.reload();};}
+
+  function wireAdminLogin() {
+    const form = $('#adminLoginForm');
+    if (!form || form.dataset.ready) return;
+
+    form.dataset.ready = '1';
+    form.onsubmit = async event => {
+      event.preventDefault();
+      if (!initDb()) return;
+
+      const values = new FormData(form);
+      const { error } = await db.auth.signInWithPassword({
+        email: String(values.get('email')).trim().toLowerCase(),
+        password: String(values.get('password'))
+      });
+
+      if (error) {
+        $('#adminAuthStatus').textContent = error.message;
+        return;
+      }
+
+      location.reload();
+    };
+  }
 
   async function adminLoad(table, order='created_at'){if(initDb())return await select(table,'*',q=>q.order(order,{ascending:false}));const d=baseData();return d[table]||[];}
   async function adminRenderStats(){const a=JSON.parse(localStorage.getItem('sky-analytics-local')||'{}');let views=a.page_view||0,interactions=a.click||0,guests=0,tests=0;if(initDb()){try{const v=await db.from('analytics_events').select('id',{count:'exact',head:true}).eq('event_type','page_view');const c=await db.from('analytics_events').select('id',{count:'exact',head:true}).eq('event_type','click');const g=await db.from('guestbook').select('id',{count:'exact',head:true});const t=await db.from('testimonials').select('id',{count:'exact',head:true}).eq('approved',true);views=v.count||0;interactions=c.count||0;guests=g.count||0;tests=t.count||0;}catch(e){console.debug(e);}}else{guests=(baseData().guestbook||[]).length;tests=(baseData().testimonials||[]).filter(x=>x.approved).length;}if($('#statViews'))$('#statViews').textContent=views;if($('#statInteractions'))$('#statInteractions').textContent=interactions;if($('#statGuests'))$('#statGuests').textContent=guests;if($('#statTestimonials'))$('#statTestimonials').textContent=tests;}
