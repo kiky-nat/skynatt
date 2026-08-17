@@ -2,14 +2,16 @@ window.SKY_CONFIG = {
   supabaseUrl: 'https://fslcpzwnribbbprnbslc.supabase.co',
   supabaseAnonKey: 'sb_publishable_eMzZKx55m4Xm2hGPyE1I9w_ew42KK3s',
   links: {
-    vgen: 'https://vgen.co/',
-    etsy: 'https://www.etsy.com/',
-    kofi: 'https://ko-fi.com/',
-    wishlist: '#',
-    twitch: 'https://www.twitch.tv/',
+    vgen: 'https://vgen.co/skynatt_',
+    etsy: '',
+    kofi: 'https://ko-fi.com/skynatt_',
+    wishlist: 'https://throne.com/skynatt',
+    twitch: 'https://www.twitch.tv/skynatt_',
+    twitterVtuber: 'https://x.com/SkyNatt_',
+    twitterArt: 'https://x.com/SkyNattArts',
     twitter: 'https://x.com/SkyNattArts',
-    instagram: 'https://www.instagram.com/',
-    discord: '#'
+    instagram: 'https://www.instagram.com/bannednata/?hl=es',
+    discord: ''
   },
   assets: {
     hero: 'assets/hero-pose.png',
@@ -34,22 +36,8 @@ window.SKY_CONFIG = {
     '2026-08-22': 'OPEN',
     '2026-08-29': 'RESERVED'
   },
-  gallery: Array.from({ length: 6 }, (_, i) => ({
-    id: `work-${i + 1}`,
-    src: `assets/gallery/work-${i + 1}.svg`,
-    alt: `SkyNatt artwork ${i + 1}`,
-    titleEs: `Creación ${i + 1}`,
-    titleEn: `Creation ${i + 1}`,
-    tags: ['art']
-  })),
-  resources: [
-    { id: 'agenda', cat: 'planning', nameEs: 'Agenda digital', nameEn: 'Digital planner', descEs: 'Agenda fija con opción de personalización futura.', descEn: 'Fixed planner with a future customization option.', image: 'assets/products/product-1.svg', vgen: 'https://vgen.co/', etsy: 'https://www.etsy.com/', tags: ['agenda', 'planning'], customizable: true },
-    { id: 'notion', cat: 'planning', nameEs: 'Plantillas Notion', nameEn: 'Notion templates', descEs: 'Sistemas para estudio, trabajo y organización diaria.', descEn: 'Systems for study, work and everyday organization.', image: 'assets/products/product-2.svg', vgen: 'https://vgen.co/', etsy: 'https://www.etsy.com/', tags: ['notion', 'planning'], customizable: true },
-    { id: 'goodnotes', cat: 'study', nameEs: 'Plantillas GoodNotes', nameEn: 'GoodNotes templates', descEs: 'Plantillas digitales para planificar y estudiar.', descEn: 'Digital templates for planning and study.', image: 'assets/products/product-3.svg', vgen: 'https://vgen.co/', etsy: 'https://www.etsy.com/', tags: ['goodnotes', 'study'], customizable: true },
-    { id: 'emotes', cat: 'stream', nameEs: 'Emotes chibi custom', nameEn: 'Custom chibi emotes', descEs: 'Comisiones custom disponibles próximamente.', descEn: 'Custom commissions coming soon.', image: 'assets/products/product-4.svg', vgen: 'https://vgen.co/', etsy: 'https://www.etsy.com/', tags: ['emotes', 'stream'], customizable: false },
-    { id: 'stream', cat: 'stream', nameEs: 'Widgets & overlays', nameEn: 'Widgets & overlays', descEs: 'Productos prediseñados para streamers.', descEn: 'Ready-made products for streamers.', image: 'assets/products/product-5.svg', vgen: 'https://vgen.co/', etsy: 'https://www.etsy.com/', tags: ['widgets', 'overlay', 'stream'], customizable: false },
-    { id: 'study', cat: 'study', nameEs: 'Study & organización', nameEn: 'Study & organization', descEs: 'Recursos para estudiantes, profesores y organización.', descEn: 'Resources for students, teachers and organization.', image: 'assets/products/product-6.svg', vgen: 'https://vgen.co/', etsy: 'https://www.etsy.com/', tags: ['study', 'teacher', 'planning'], customizable: false }
-  ],
+  gallery: [],
+  resources: [],
   setup: [
     ['Laptop', '13th Gen Intel(R) Core(TM) i5-13500H · 2.60 GHz · 16 GB RAM · NVIDIA GeForce RTX 4060'],
     ['Graphics tablet', 'XP-Pen Artist 15.6 Pro'],

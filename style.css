@@ -65,7 +65,7 @@ body:before {
   display:flex;
   gap:18px;
   align-items:center;
-  flex:1;
+  margin-left:auto;
   justify-content:center
 }
 .desktop-nav a,.footer-links a {
@@ -79,7 +79,9 @@ body:before {
 }
 .nav-actions {
   display:flex;
-  gap:7px
+  gap:7px;
+  margin-left:18px;
+  flex-shrink:0
 }
 .nav-actions button,.carousel-controls button,.icon-btn {
   border:1px solid var(--border);
@@ -2061,4 +2063,35 @@ html,body {
 
 .account-tabs button[hidden] {
   display: none;
+}
+
+/* v11 admin/content refinements */
+.admin-content .content-row {
+  grid-template-columns:72px minmax(0,1fr) auto;
+}
+.admin-content .content-row > div:last-child {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.admin-content .content-row .danger {
+  border-color:#d78ba8;
+}
+#syncInfo,
+#twitchStatus,
+#etsyStatus,
+#vgenStatus {
+  min-height:1.25em;
+  margin:8px 0 0;
+  color:var(--muted);
+  font-weight:800;
+}
+@media (max-width: 900px) {
+  .desktop-nav {
+    margin-left:0;
+  }
+  .nav-actions {
+    margin-left:auto;
+  }
 }

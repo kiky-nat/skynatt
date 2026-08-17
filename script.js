@@ -8,7 +8,7 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const CFG = window.SKY_CONFIG || {};
-  const STORAGE = 'skynatt-site-data-v9';
+  const STORAGE = 'skynatt-site-data-v11';
   const LANG_KEY = 'sky-lang';
   const THEME_KEY = 'sky-theme';
   let lang = localStorage.getItem(LANG_KEY) || 'es';
@@ -36,7 +36,7 @@
       accountKicker:'CUENTA',accountTitle:'Tu espacio personal.',accountText:'La cuenta es opcional. Puedes crearla con un usuario, correo y contraseña, sin pedirte datos personales innecesarios.',createAccountTab:'Crear cuenta',loginAccountTab:'Iniciar sesión',profileTab:'Mi perfil',usernameLabel:'Usuario',emailLabel:'Correo electrónico',passwordLabel:'Contraseña',createAccount:'Crear cuenta',loginAccount:'Iniciar sesión',logout:'Cerrar sesión',goDownloads:'Ir a mis descargas',loggedInAs:'CONECTADO COMO',accountPrivacy:'No necesitas introducir nombre real, dirección, teléfono ni otros datos que no sean necesarios para tu cuenta.',
       purchaseTitle:'Mis productos',demoBadge:'PREPARADO',purchaseNote:'Las compras de Etsy/VGen no se importan automáticamente desde el navegador. Cuando exista una integración autorizada, los productos podrán asignarse aquí.',
       termsTitle:'Términos de Servicio',termsIntro:'Actualizados el 06/12/2025 · Esta página puede actualizarse antes de futuras compras o encargos.',comingTitle:'Personalización, próximamente.',comingText:'La tienda seguirá siendo fija en VGen/Etsy. Cuando un producto tenga personalización, su botón te traerá aquí para configurar tu versión.',comingBadge:'COMING SOON',comingDetails:'La estructura está preparada para agendas, Notion, GoodNotes y otros productos. Esta parte se desarrollará aparte para que sea una experiencia completa.',backShop:'Volver a la tienda',
-      adminPurchases:'Compras',adminTitle:'Tu panel de control.',adminText:'Gestiona calendario, Guestbook, testimonios, creaciones, recursos e integraciones desde un solo lugar.',adminQuick:'Acciones rápidas',adminOverview:'Resumen',adminCalendar:'Calendario',adminGuestbook:'Guestbook',adminTestimonials:'Testimonios',adminContent:'Contenido',adminIntegrations:'Conexiones',adminOpenCalendar:'Abrir calendario',adminModerate:'Moderar mensajes',adminManageTestimonials:'Gestionar testimonios',adminPublicMode:'Estado de conexión',
+      adminPurchases:'Compras',adminCreations:'Creaciones',adminResources:'Recursos',adminTitle:'Tu panel de control.',adminText:'Gestiona calendario, Guestbook, testimonios, creaciones, recursos e integraciones desde un solo lugar.',adminQuick:'Acciones rápidas',adminOverview:'Resumen',adminCalendar:'Calendario',adminGuestbook:'Guestbook',adminTestimonials:'Testimonios',adminContent:'Contenido',adminIntegrations:'Conexiones',adminOpenCalendar:'Abrir calendario',adminModerate:'Moderar mensajes',adminManageTestimonials:'Gestionar testimonios',adminPublicMode:'Estado de conexión',
       authRequired:'Inicia sesión con tu cuenta de Admin para entrar.',notAdmin:'Esta cuenta no tiene permisos de administración.',supabaseReady:'Supabase conectado · datos compartidos',localMode:'Modo local · los cambios solo afectan a este navegador',save:'Guardar',delete:'Eliminar',edit:'Editar',newItem:'Nuevo',approved:'Aprobado',pending:'Pendiente',connected:'Conectado',notConnected:'No conectado',saved:'Guardado correctamente.',deleted:'Eliminado.',error:'Ha ocurrido un error.',
       egg1:'you found me ✦',egg2:'the interspace was hiding here',egg3:'a little secret for curious stars',egg4:'✨ thanks for exploring',egg5:'you found the fifth message ✧'
     },
@@ -53,7 +53,7 @@
       accountKicker:'ACCOUNT',accountTitle:'Your personal space.',accountText:'An account is optional. Create one with a username, email and password without unnecessary personal information.',createAccountTab:'Create account',loginAccountTab:'Sign in',profileTab:'My profile',usernameLabel:'Username',emailLabel:'Email',passwordLabel:'Password',createAccount:'Create account',loginAccount:'Sign in',logout:'Sign out',goDownloads:'Go to my downloads',loggedInAs:'SIGNED IN AS',accountPrivacy:'You do not need to provide your real name, address, phone number or other unnecessary personal information.',
       purchaseTitle:'My products',demoBadge:'READY',purchaseNote:'Etsy/VGen purchases are not imported automatically by the browser. When an authorized integration exists, purchases can be assigned here.',
       termsTitle:'Terms of Service',termsIntro:'Updated 06/12/2025 · This page may be updated before future purchases or commissions.',comingTitle:'Customization, coming soon.',comingText:'The shop stays fixed on VGen/Etsy. When a product supports customization, its button will bring you here to configure your version.',comingBadge:'COMING SOON',comingDetails:'The structure is ready for planners, Notion, GoodNotes and other products. This part will be developed separately as a complete experience.',backShop:'Back to shop',
-      adminPurchases:'Purchases',adminTitle:'Your control panel.',adminText:'Manage the calendar, Guestbook, testimonials, creations, resources and integrations from one place.',adminQuick:'Quick actions',adminOverview:'Overview',adminCalendar:'Calendar',adminGuestbook:'Guestbook',adminTestimonials:'Testimonials',adminContent:'Content',adminIntegrations:'Integrations',adminOpenCalendar:'Open calendar',adminModerate:'Moderate messages',adminManageTestimonials:'Manage testimonials',adminPublicMode:'Connection status',
+      adminPurchases:'Purchases',adminCreations:'Creations',adminResources:'Resources',adminTitle:'Your control panel.',adminText:'Manage the calendar, Guestbook, testimonials, creations, resources and integrations from one place.',adminQuick:'Quick actions',adminOverview:'Overview',adminCalendar:'Calendar',adminGuestbook:'Guestbook',adminTestimonials:'Testimonials',adminContent:'Content',adminIntegrations:'Integrations',adminOpenCalendar:'Open calendar',adminModerate:'Moderate messages',adminManageTestimonials:'Manage testimonials',adminPublicMode:'Connection status',
       authRequired:'Sign in with your Admin account to enter.',notAdmin:'This account does not have administrator permissions.',supabaseReady:'Supabase connected · shared data',localMode:'Local mode · changes affect this browser only',save:'Save',delete:'Delete',edit:'Edit',newItem:'New',approved:'Approved',pending:'Pending',connected:'Connected',notConnected:'Not connected',saved:'Saved successfully.',deleted:'Deleted.',error:'Something went wrong.',
       egg1:'you found me ✦',egg2:'the interspace was hiding here',egg3:'a little secret for curious stars',egg4:'✨ thanks for exploring',egg5:'you found the fifth message ✧'
     }
@@ -75,8 +75,8 @@
   function baseData() {
     const d = localData();
     return {
-      gallery: d.gallery || clone(CFG.gallery || []),
-      resources: d.resources || clone(CFG.resources || []),
+      gallery: d.gallery || [],
+      resources: d.resources || [],
       slots: d.slots || clone(CFG.slots || {}),
       testimonials: d.testimonials || clone(CFG.testimonials || []),
       guestbook: d.guestbook || [],
@@ -144,27 +144,92 @@
 
   async function loadPublicData() {
     const local = baseData();
-    if (!initDb()) return local;
-    try {
-      const [gallery, resources, slots, tests, links, lastStream, nextStream, socialPosts] = await Promise.all([
-        select('creations','id,src,alt,title_es,title_en,tags,visible,created_at', q => q.eq('visible', true).order('sort_order',{ascending:true}).order('created_at',{ascending:false})),
-        select('resources','id,cat,name_es,name_en,desc_es,desc_en,image,vgen,etsy,tags,customizable,visible,sort_order', q => q.eq('visible', true).order('sort_order',{ascending:true}).order('created_at',{ascending:false})),
-        select('commission_slots','slot_date,status'),
-        select('testimonials','id,name,message,commission,source,approved,created_at', q => q.eq('approved', true).order('created_at',{ascending:false})),
-        settingGet('publicLinks'), settingGet('lastStream'), settingGet('nextStream'), settingGet('socialPosts')
+
+    if (!initDb()) {
+      return local;
+    }
+
+    const read = async (table, columns, queryFn) => {
+      try {
+        return await select(table, columns, queryFn);
+      } catch (error) {
+        console.warn(`Supabase read failed: ${table}`, error);
+        return [];
+      }
+    };
+
+    const [gallery, resources, slots, tests, links, lastStream, nextStream, socialPosts] =
+      await Promise.all([
+        read(
+          'creations',
+          'id,src,alt,title_es,title_en,tags,visible,created_at,sort_order',
+          q => q
+            .eq('visible', true)
+            .order('sort_order', { ascending: true })
+            .order('created_at', { ascending: false })
+        ),
+        read(
+          'resources',
+          'id,cat,name_es,name_en,desc_es,desc_en,image,vgen,etsy,tags,customizable,visible,sort_order',
+          q => q
+            .eq('visible', true)
+            .order('sort_order', { ascending: true })
+            .order('created_at', { ascending: false })
+        ),
+        read('commission_slots', 'slot_date,status'),
+        read(
+          'testimonials',
+          'id,name,message,commission,source,approved,created_at',
+          q => q.eq('approved', true).order('created_at', { ascending: false })
+        ),
+        settingGet('publicLinks').catch(error => {
+          console.warn('Supabase read failed: publicLinks', error);
+          return null;
+        }),
+        settingGet('lastStream').catch(error => {
+          console.warn('Supabase read failed: lastStream', error);
+          return null;
+        }),
+        settingGet('nextStream').catch(error => {
+          console.warn('Supabase read failed: nextStream', error);
+          return null;
+        }),
+        settingGet('socialPosts').catch(error => {
+          console.warn('Supabase read failed: socialPosts', error);
+          return null;
+        })
       ]);
-      return {
-        ...local,
-        gallery: gallery?.map(x=>({id:x.id,src:x.src,alt:x.alt,titleEs:x.title_es,titleEn:x.title_en,tags:x.tags||[]})) || local.gallery,
-        resources: resources?.map(x=>({id:x.id,cat:x.cat,nameEs:x.name_es,nameEn:x.name_en,descEs:x.desc_es,descEn:x.desc_en,image:x.image,vgen:x.vgen,etsy:x.etsy,tags:x.tags||[],customizable:x.customizable})) || local.resources,
-        slots: Object.fromEntries((slots||[]).map(x=>[x.slot_date,x.status])),
-        testimonials: tests || [],
-        links: links || local.links,
-        lastStream: lastStream || local.lastStream,
-        nextStream: nextStream || local.nextStream,
-        socialPosts: socialPosts || local.socialPosts
-      };
-    } catch (e) { console.warn('Supabase public read failed; using local fallback.', e); return local; }
+
+    return {
+      ...local,
+      gallery: gallery.map(x => ({
+        id: x.id,
+        src: x.src,
+        alt: x.alt,
+        titleEs: x.title_es,
+        titleEn: x.title_en,
+        tags: x.tags || []
+      })),
+      resources: resources.map(x => ({
+        id: x.id,
+        cat: x.cat,
+        nameEs: x.name_es,
+        nameEn: x.name_en,
+        descEs: x.desc_es,
+        descEn: x.desc_en,
+        image: x.image,
+        vgen: x.vgen,
+        etsy: x.etsy,
+        tags: x.tags || [],
+        customizable: x.customizable
+      })),
+      slots: Object.fromEntries((slots || []).map(x => [x.slot_date, x.status])),
+      testimonials: tests || [],
+      links: links || local.links,
+      lastStream: lastStream || local.lastStream,
+      nextStream: nextStream || local.nextStream,
+      socialPosts: socialPosts || local.socialPosts
+    };
   }
 
   async function track(type) {
@@ -763,20 +828,37 @@
   function renderAdminList(root,items,type){if(!root)return;root.innerHTML=items.map((x,i)=>{const title=type==='creation'?(lang==='es'?x.titleEs:x.titleEn):(lang==='es'?x.nameEs:x.nameEn);const img=type==='creation'?x.src:x.image;return `<div class="admin-row content-row"><div class="content-thumb"><img src="${safeUrl(img)}" alt=""></div><div><b>${esc(title)}</b><p>${esc((x.tags||[]).join(' · '))}${x.visible===false?` · <span class="form-note">${lang==='es'?'Oculto':'Hidden'}</span>`:''}</p></div><div><button class="btn small ghost" data-${type}-edit="${i}">${text('edit')}</button><button class="btn small danger" data-${type}-delete="${i}">${text('delete')}</button></div></div>`}).join('')||'<p class="muted">No hay elementos.</p>';}
   async function getAdminContent(table){if(initDb())return await adminLoad(table,'sort_order');const d=baseData();return table==='creations'?(d.gallery||[]):(d[table]||[]);}
   async function setupContentManagers(){const cf=$('#creationForm'),rf=$('#resourceForm');if(!cf||!rf)return;
-    let creations=await getAdminContent('creations'),resources=await getAdminContent('resources');
-    const refresh=async()=>{creations=await getAdminContent('creations');resources=await getAdminContent('resources');renderAdminList($('#adminCreations'),creations,'creation');renderAdminList($('#adminResources'),resources,'resource');bindEditDelete();};
-    async function saveCreation(e){e.preventDefault();const f=new FormData(cf);let src=String(f.get('src')||'').trim();const file=f.get('imageFile');if(file?.size)src=await uploadAsset(file,'creations');const item={id:String(f.get('id')||crypto.randomUUID?.()||Date.now()),src,alt:String(f.get('alt')||f.get('titleEs')||''),titleEs:String(f.get('titleEs')||''),titleEn:String(f.get('titleEn')||f.get('titleEs')||''),tags:String(f.get('tags')||'').split(',').map(x=>x.trim()).filter(Boolean),visible:true};if(!src)throw new Error('Falta la imagen.');if(initDb()){await upsert('creations',{id:item.id,src:item.src,alt:item.alt,title_es:item.titleEs,title_en:item.titleEn,tags:item.tags,visible:f.get('visible')==='on'});}else{const idx=creations.findIndex(x=>x.id===item.id);if(idx>=0)creations[idx]=item;else creations.push(item);saveLocal({gallery:creations});}cf.reset();cf.elements.id.value='';await refresh();await renderAll();toast(text('saved'));}
-    async function saveResource(e){e.preventDefault();const f=new FormData(rf);let image=String(f.get('image')||'').trim();const file=f.get('imageFile');if(file?.size)image=await uploadAsset(file,'resources');const item={id:String(f.get('id')||crypto.randomUUID?.()||Date.now()),cat:String(f.get('cat')||'other'),nameEs:String(f.get('nameEs')||''),nameEn:String(f.get('nameEn')||f.get('nameEs')||''),descEs:String(f.get('descEs')||''),descEn:String(f.get('descEn')||f.get('descEs')||''),image,vgen:String(f.get('vgen')||'').trim(),etsy:String(f.get('etsy')||'').trim(),tags:String(f.get('tags')||'').split(',').map(x=>x.trim()).filter(Boolean),customizable:f.get('customizable')==='on',visible:true};if(!image)throw new Error('Falta la imagen.');if(initDb()){await upsert('resources',{id:item.id,cat:item.cat,name_es:item.nameEs,name_en:item.nameEn,desc_es:item.descEs,desc_en:item.descEn,image:item.image,vgen:item.vgen,etsy:item.etsy,tags:item.tags,customizable:item.customizable,visible:item.visible});}else{const idx=resources.findIndex(x=>x.id===item.id);if(idx>=0)resources[idx]=item;else resources.push(item);saveLocal({resources});}rf.reset();rf.elements.id.value='';await refresh();await renderAll();toast(text('saved'));}
+    let creations=[],resources=[];
+    const refresh=async()=>{try{creations=await getAdminContent('creations');resources=await getAdminContent('resources');renderAdminList($('#adminCreations'),creations,'creation');renderAdminList($('#adminResources'),resources,'resource');bindEditDelete();}catch(error){console.error(error);$('#adminCreations').innerHTML=`<p class=\"muted\">${esc(error.message||text('error'))}</p>`;$('#adminResources').innerHTML=`<p class=\"muted\">${esc(error.message||text('error'))}</p>`;}};
+    async function saveCreation(e){e.preventDefault();const f=new FormData(cf);let src=String(f.get('src')||'').trim();const file=f.get('imageFile');if(file?.size)src=await uploadAsset(file,'creations');const item={id:String(f.get('id')||crypto.randomUUID?.()||Date.now()),src,alt:String(f.get('alt')||f.get('titleEs')||''),titleEs:String(f.get('titleEs')||''),titleEn:String(f.get('titleEn')||f.get('titleEs')||''),tags:String(f.get('tags')||'').split(',').map(x=>x.trim()).filter(Boolean),visible:f.get('visible')==='on'};if(!src)throw new Error('Falta la imagen.');if(initDb()){await upsert('creations',{id:item.id,src:item.src,alt:item.alt,title_es:item.titleEs,title_en:item.titleEn,tags:item.tags,visible:item.visible,sort_order:Number(f.get('sortOrder')||0)});}else{const idx=creations.findIndex(x=>x.id===item.id);if(idx>=0)creations[idx]=item;else creations.push(item);saveLocal({gallery:creations});}cf.reset();cf.elements.id.value='';await refresh();await renderAll();toast(text('saved'));}
+    async function saveResource(e){e.preventDefault();const f=new FormData(rf);let image=String(f.get('image')||'').trim();const file=f.get('imageFile');if(file?.size)image=await uploadAsset(file,'resources');const item={id:String(f.get('id')||crypto.randomUUID?.()||Date.now()),cat:String(f.get('cat')||'other'),nameEs:String(f.get('nameEs')||''),nameEn:String(f.get('nameEn')||f.get('nameEs')||''),descEs:String(f.get('descEs')||''),descEn:String(f.get('descEn')||f.get('descEs')||''),image,vgen:String(f.get('vgen')||'').trim(),etsy:String(f.get('etsy')||'').trim(),tags:String(f.get('tags')||'').split(',').map(x=>x.trim()).filter(Boolean),customizable:f.get('customizable')==='on',visible:f.get('visible')==='on'};if(!image)throw new Error('Falta la imagen.');if(initDb()){await upsert('resources',{id:item.id,cat:item.cat,name_es:item.nameEs,name_en:item.nameEn,desc_es:item.descEs,desc_en:item.descEn,image:item.image,vgen:item.vgen,etsy:item.etsy,tags:item.tags,customizable:item.customizable,visible:item.visible,sort_order:Number(f.get('sortOrder')||0)});}else{const idx=resources.findIndex(x=>x.id===item.id);if(idx>=0)resources[idx]=item;else resources.push(item);saveLocal({resources});}rf.reset();rf.elements.id.value='';await refresh();await renderAll();toast(text('saved'));}
     cf.onsubmit=e=>saveCreation(e).catch(err=>toast(err.message||text('error')));rf.onsubmit=e=>saveResource(e).catch(err=>toast(err.message||text('error')));$('#creationReset')?.addEventListener('click',()=>{cf.reset();cf.elements.id.value='';});$('#resourceReset')?.addEventListener('click',()=>{rf.reset();rf.elements.id.value='';});
     window.__adminContent={get creations(){return creations},get resources(){return resources},refresh};await refresh();
   }
   function bindEditDelete(){
-    $$('[data-creation-edit]').forEach(b=>b.onclick=()=>{const x=window.__adminContent.creations[+b.dataset.creationEdit],f=$('#creationForm');Object.entries({id:x.id,titleEs:x.titleEs||x.title_es||'',titleEn:x.titleEn||x.title_en||'',src:x.src,alt:x.alt||'',tags:(x.tags||[]).join(', ')}).forEach(([k,v])=>{if(f.elements[k])f.elements[k].value=v});if(f.elements.visible)f.elements.visible.checked=x.visible!==false;f.scrollIntoView({behavior:'smooth',block:'center'});});
+    $$('[data-creation-edit]').forEach(b=>b.onclick=()=>{const x=window.__adminContent.creations[+b.dataset.creationEdit],f=$('#creationForm');Object.entries({id:x.id,titleEs:x.titleEs||x.title_es||'',titleEn:x.titleEn||x.title_en||'',src:x.src,alt:x.alt||'',tags:(x.tags||[]).join(', '),sortOrder:x.sort_order||0}).forEach(([k,v])=>{if(f.elements[k])f.elements[k].value=v});if(f.elements.visible)f.elements.visible.checked=x.visible!==false;f.scrollIntoView({behavior:'smooth',block:'center'});});
     $$('[data-creation-delete]').forEach(b=>b.onclick=async()=>{if(!confirm(lang==='es'?'¿Eliminar esta creación?':'Delete this creation?'))return;const x=window.__adminContent.creations[+b.dataset.creationDelete];try{if(initDb())await remove('creations','id',x.id);else{const d=baseData();d.gallery=d.gallery.filter(y=>y.id!==x.id);saveLocal({gallery:d.gallery});}await window.__adminContent.refresh();await renderAll();toast(text('deleted'));}catch(e){toast(e.message||text('error'));}});
-    $$('[data-resource-edit]').forEach(b=>b.onclick=()=>{const x=window.__adminContent.resources[+b.dataset.resourceEdit],f=$('#resourceForm');Object.entries({id:x.id,nameEs:x.nameEs||x.name_es||'',nameEn:x.nameEn||x.name_en||'',cat:x.cat||'other',descEs:x.descEs||x.desc_es||'',descEn:x.descEn||x.desc_en||'',image:x.image||'',vgen:x.vgen||'',etsy:x.etsy||'',tags:(x.tags||[]).join(', ')}).forEach(([k,v])=>{if(f.elements[k])f.elements[k].value=v});if(f.elements.visible)f.elements.visible.checked=x.visible!==false;if(f.elements.customizable)f.elements.customizable.checked=!!x.customizable;f.scrollIntoView({behavior:'smooth',block:'center'});});
+    $$('[data-resource-edit]').forEach(b=>b.onclick=()=>{const x=window.__adminContent.resources[+b.dataset.resourceEdit],f=$('#resourceForm');Object.entries({id:x.id,nameEs:x.nameEs||x.name_es||'',nameEn:x.nameEn||x.name_en||'',cat:x.cat||'other',descEs:x.descEs||x.desc_es||'',descEn:x.descEn||x.desc_en||'',image:x.image||'',vgen:x.vgen||'',etsy:x.etsy||'',tags:(x.tags||[]).join(', '),sortOrder:x.sort_order||0}).forEach(([k,v])=>{if(f.elements[k])f.elements[k].value=v});if(f.elements.visible)f.elements.visible.checked=x.visible!==false;if(f.elements.customizable)f.elements.customizable.checked=!!x.customizable;f.scrollIntoView({behavior:'smooth',block:'center'});});
     $$('[data-resource-delete]').forEach(b=>b.onclick=async()=>{if(!confirm(lang==='es'?'¿Eliminar este recurso?':'Delete this resource?'))return;const x=window.__adminContent.resources[+b.dataset.resourceDelete];try{if(initDb())await remove('resources','id',x.id);else{const d=baseData();d.resources=d.resources.filter(y=>y.id!==x.id);saveLocal({resources:d.resources});}await window.__adminContent.refresh();await renderAll();toast(text('deleted'));}catch(e){toast(e.message||text('error'));}});
   }
-  async function setupAdminCalendar(){const root=$('#adminCalendarGrid');if(!root)return;async function data(){if(initDb()){const rows=await select('commission_slots','slot_date,status',q=>q);return Object.fromEntries((rows||[]).map(x=>[x.slot_date,x.status]));}return baseData().slots||{};}async function render(){const slots=await data(),y=adminCalendarDate.getFullYear(),m=adminCalendarDate.getMonth();$('#adminCalendarTitle').textContent=new Intl.DateTimeFormat(lang,{month:'long',year:'numeric'}).format(adminCalendarDate);const first=(new Date(y,m,1).getDay()+6)%7,days=new Date(y,m+1,0).getDate();let h='';for(let i=0;i<first;i++)h+='<div class="day blank"></div>';for(let d=1;d<=days;d++){const key=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`,s=slots[key]||'CLOSED';h+=`<button class="day ${s.toLowerCase()} admin-day" data-date="${key}" data-status="${s}"><b>${d}</b><small>${s}</small></button>`;}root.innerHTML=h;$$('.admin-day',root).forEach(b=>b.onclick=async()=>{const next={CLOSED:'OPEN',OPEN:'RESERVED',RESERVED:'CLOSED'}[b.dataset.status];try{if(initDb())await upsert('commission_slots',{slot_date:b.dataset.date,status:next,updated_at:new Date().toISOString()});else{const d=baseData();d.slots[b.dataset.date]=next;saveLocal({slots:d.slots});}render();renderAll();}catch(e){toast(e.message||text('error'));}});}$('#adminPrevMonth')?.addEventListener('click',()=>{adminCalendarDate.setMonth(adminCalendarDate.getMonth()-1);render()});$('#adminNextMonth')?.addEventListener('click',()=>{adminCalendarDate.setMonth(adminCalendarDate.getMonth()+1);render()});render();}
+  async function setupAdminCalendar(){const root=$('#adminCalendarGrid');if(!root)return;async function data(){if(initDb()){const rows=await select('commission_slots','slot_date,status',q=>q);return Object.fromEntries((rows||[]).map(x=>[x.slot_date,x.status]));}return baseData().slots||{};}async function render(){const slots=await data(),y=adminCalendarDate.getFullYear(),m=adminCalendarDate.getMonth();$('#adminCalendarTitle').textContent=new Intl.DateTimeFormat(lang,{month:'long',year:'numeric'}).format(adminCalendarDate);const first=(new Date(y,m,1).getDay()+6)%7,days=new Date(y,m+1,0).getDate();let h='';for(let i=0;i<first;i++)h+='<div class="day blank"></div>';for(let d=1;d<=days;d++){const key=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`,s=slots[key]||'CLOSED';h+=`<button class="day ${s.toLowerCase()} admin-day" data-date="${key}" data-status="${s}"><b>${d}</b><small>${s}</small></button>`;}root.innerHTML=h;$$('.admin-day',root).forEach(b=>b.onclick=async()=>{const next={CLOSED:'OPEN',OPEN:'RESERVED',RESERVED:'CLOSED'}[b.dataset.status];try{
+        if(initDb()) {
+          await upsert('commission_slots', {
+            slot_date:b.dataset.date,
+            status:next,
+            updated_at:new Date().toISOString()
+          });
+        } else {
+          const d=baseData();
+          d.slots[b.dataset.date]=next;
+          saveLocal({slots:d.slots});
+        }
+        await render();
+        await renderAll();
+        toast(text('saved'));
+      }catch(e){
+        toast(e.message||text('error'));
+      }});}$('#adminPrevMonth')?.addEventListener('click',()=>{adminCalendarDate.setMonth(adminCalendarDate.getMonth()-1);render()});$('#adminNextMonth')?.addEventListener('click',()=>{adminCalendarDate.setMonth(adminCalendarDate.getMonth()+1);render()});render();}
   async function loadTwitchAutomation(data){
     const endpoint=data?.links?.twitchEndpoint || '';
     if(!endpoint)return;
@@ -846,15 +928,53 @@
 
   async function setupAdminGeneral(){await adminRenderStats();await adminRenderGuests();await adminRenderTestimonials();if($('#refreshGuests'))$('#refreshGuests').onclick=adminRenderGuests;$('#resetAnalytics')?.addEventListener('click',()=>{localStorage.removeItem('sky-analytics-local');adminRenderStats();});
     const tf=$('#twitchConnectForm'),ef=$('#etsyConnectForm');
-    async function loadSettings(){const links=initDb()?(await settingGet('publicLinks'))||baseData().links:baseData().links;const integ=initDb()?(await integrationGet('connections'))||{}:{};if(tf){tf.twitchUrl.value=links.twitch||'';tf.twitchEndpoint.value=links.twitchEndpoint||'';$('#twitchOpen').href=links.twitch||'#';$('#twitchStatus').textContent=links.twitch?text('connected'):text('notConnected');}if(ef){ef.etsyUrl.value=links.etsy||'';ef.etsyWebhook.value=integ.etsyWebhook||'';$('#etsyOpen').href=links.etsy||'#';$('#etsyStatus').textContent=links.etsy?text('connected'):text('notConnected');}if($('#vgenUrl'))$('#vgenUrl').value=links.vgen||'';}
+    async function loadSettings(){
+      if($('#syncInfo')){
+        $('#syncInfo').textContent=initDb()
+          ? `Supabase conectado · ${new Date().toLocaleString(lang==='es'?'es-ES':'en-GB')}`
+          : text('localMode');
+      }
+      try{
+        const links=initDb()
+          ? (await settingGet('publicLinks')) || baseData().links
+          : baseData().links;
+        const integ=initDb()
+          ? (await integrationGet('connections')) || {}
+          : {};
+
+        if(tf){
+          tf.twitchUrl.value=links.twitch||'';
+          tf.twitchEndpoint.value=links.twitchEndpoint||'';
+          $('#twitchOpen').href=links.twitch||'#';
+          $('#twitchStatus').textContent=links.twitch
+            ? `${text('connected')} · URL guardada`
+            : text('notConnected');
+        }
+        if(ef){
+          ef.etsyUrl.value=links.etsy||'';
+          ef.etsyWebhook.value=integ.etsyWebhook||'';
+          $('#etsyOpen').href=links.etsy||'#';
+          $('#etsyStatus').textContent=links.etsy
+            ? `${text('connected')} · URL guardada`
+            : text('notConnected');
+        }
+        if($('#vgenUrl'))$('#vgenUrl').value=links.vgen||'';
+        if($('#vgenStatus'))$('#vgenStatus').textContent=links.vgen
+          ? `${text('connected')} · URL guardada`
+          : text('notConnected');
+      }catch(error){
+        console.error('Admin settings could not be loaded',error);
+        if($('#syncInfo'))$('#syncInfo').textContent=`${text('supabaseReady')} · ${error.message||text('error')}`;
+      }
+    }
     tf?.addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(tf),url=String(f.get('twitchUrl')||'').trim(),endpoint=String(f.get('twitchEndpoint')||'').trim();try{if(initDb()){const links=(await settingGet('publicLinks'))||{};links.twitch=url;links.twitchEndpoint=endpoint;await settingSet('publicLinks',links);const integ=(await integrationGet('connections'))||{};integ.twitchConnectedAt=new Date().toISOString();await integrationSet('connections',integ);}else{const d=baseData();d.links.twitch=url;saveLocal({links:d.links,twitchEndpoint:endpoint});}$('#twitchOpen').href=url||'#';toast(text('saved'));}catch(e){toast(e.message||text('error'));}});
     ef?.addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(ef),url=String(f.get('etsyUrl')||'').trim(),webhook=String(f.get('etsyWebhook')||'').trim();try{if(initDb()){const links=(await settingGet('publicLinks'))||{};links.etsy=url;await settingSet('publicLinks',links);const integ=(await integrationGet('connections'))||{};integ.etsyWebhook=webhook;await integrationSet('connections',integ);}else{const d=baseData();d.links.etsy=url;saveLocal({links:d.links,etsyWebhook:webhook});}$('#etsyOpen').href=url||'#';toast(text('saved'));}catch(e){toast(e.message||text('error'));}});
     $('#saveVgen')?.addEventListener('click',async()=>{const url=$('#vgenUrl').value.trim();try{if(initDb()){const links=(await settingGet('publicLinks'))||{};links.vgen=url;await settingSet('publicLinks',links);}else{const d=baseData();d.links.vgen=url;saveLocal({links:d.links});}toast(text('saved'));}catch(e){toast(e.message||text('error'));}});
     const pl=$('#publicLinksForm');
     if(pl){
       const links=initDb()?(await settingGet('publicLinks'))||baseData().links:baseData().links;
-      ['vgen','etsy','kofi','wishlist','twitch','instagram','twitter','discord','twitchEndpoint'].forEach(k=>{if(pl.elements[k])pl.elements[k].value=links[k]||''});
-      pl.addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(pl),links={};for(const k of ['vgen','etsy','kofi','wishlist','twitch','instagram','twitter','discord','twitchEndpoint'])links[k]=String(f.get(k)||'').trim();try{if(initDb())await settingSet('publicLinks',links);else saveLocal({links});toast(text('saved'));}catch(err){toast(err.message||text('error'));}});
+      ['vgen','etsy','kofi','wishlist','twitch','instagram','twitterVtuber','twitterArt','twitter','discord','twitchEndpoint'].forEach(k=>{if(pl.elements[k])pl.elements[k].value=links[k]||''});
+      pl.addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(pl),links={};for(const k of ['vgen','etsy','kofi','wishlist','twitch','instagram','twitterVtuber','twitterArt','twitter','discord','twitchEndpoint'])links[k]=String(f.get(k)||'').trim();try{if(initDb())await settingSet('publicLinks',links);else saveLocal({links});toast(text('saved'));}catch(err){toast(err.message||text('error'));}});
     }
     const sp=$('#socialPostsForm'),spf=$('#socialPostFields');
     if(sp&&spf){
@@ -865,7 +985,7 @@
     const sf=$('#streamForm');sf?.addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(sf);const last={titleEs:f.get('lastTitle'),titleEn:f.get('lastTitle'),textEs:f.get('lastText'),textEn:f.get('lastText')},next={titleEs:f.get('nextTitle'),titleEn:f.get('nextTitle'),textEs:f.get('nextText'),textEn:f.get('nextText')};try{if(initDb()){await settingSet('lastStream',last);await settingSet('nextStream',next);}else saveLocal({lastStream:last,nextStream:next});await renderAll();toast(text('saved'));}catch(e){toast(e.message||text('error'));}});
     await loadSettings();
   }
-  async function setupAdmin(){if(!$('.admin-page'))return;const ok=await checkAdmin();if(!ok)return;applyLang();const tabs=$$('.admin-tab'),panels=$$('.admin-panel');tabs.forEach(b=>b.onclick=()=>{tabs.forEach(x=>x.classList.remove('active'));b.classList.add('active');panels.forEach(x=>x.classList.remove('active'));$(`[data-panel-view="${b.dataset.panel}"]`)?.classList.add('active');});$$('[data-jump]').forEach(b=>b.onclick=()=>document.querySelector(`.admin-tab[data-panel="${b.dataset.jump}"]`)?.click());await setupAdminCalendar();await setupContentManagers();await setupPurchaseAdmin();await setupAdminGeneral();
+  async function setupAdmin(){if(!$('.admin-page'))return;const ok=await checkAdmin();if(!ok)return;applyLang();const tabs=$$('.admin-tab'),panels=$$('.admin-panel');tabs.forEach(b=>b.onclick=()=>{tabs.forEach(x=>x.classList.remove('active'));b.classList.add('active');panels.forEach(x=>x.classList.remove('active'));$(`[data-panel-view="${b.dataset.panel}"]`)?.classList.add('active');});$$('[data-jump]').forEach(b=>b.onclick=()=>document.querySelector(`.admin-tab[data-panel="${b.dataset.jump}"]`)?.click());await Promise.allSettled([setupAdminCalendar(),setupContentManagers(),setupPurchaseAdmin(),setupAdminGeneral()]);
     $('#testimonialForm')?.addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(e.target);const row={name:String(f.get('name')||''),source:String(f.get('source')||''),commission:String(f.get('commission')||''),message:String(f.get('message')||''),approved:true};try{if(initDb())await upsert('testimonials',row);else{const d=baseData();d.testimonials=[row,...(d.testimonials||[])];saveLocal({testimonials:d.testimonials});}e.target.reset();await adminRenderTestimonials();await renderAll();toast(text('saved'));}catch(err){toast(err.message||text('error'));}});
   }
 
@@ -884,7 +1004,8 @@
       adminRenderStats();
     }
 
-    track('page_view');
+    if (!$('.admin-page')) await track('page_view');
+    if ($('.admin-page')) await adminRenderStats();
 
     // Keep the intro screen visible long enough to feel intentional,
     // while never allowing it to block the page indefinitely.

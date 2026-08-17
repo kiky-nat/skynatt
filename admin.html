@@ -70,13 +70,13 @@
      </button>
      <button class="admin-tab" data-panel="creations">
       🎨
-      <span>
+      <span data-i18n="adminCreations">
        Creaciones
       </span>
      </button>
      <button class="admin-tab" data-panel="resources">
       🛍️
-      <span>
+      <span data-i18n="adminResources">
        Recursos
       </span>
      </button>
@@ -299,6 +299,10 @@
          </span>
          <input name="tags" placeholder="illustration, vtuber, fanart"/>
         </label>
+        <label>
+         Orden
+         <input name="sortOrder" type="number" value="0"/>
+        </label>
         <label class="check">
          <input checked="" name="visible" type="checkbox"/>
          <span>
@@ -390,6 +394,10 @@
           separados por comas
          </span>
          <input name="tags" placeholder="planner, student, notion"/>
+        </label>
+        <label>
+         Orden
+         <input name="sortOrder" type="number" value="0"/>
         </label>
         <label class="check">
          <input checked="" name="visible" type="checkbox"/>
@@ -543,7 +551,15 @@
          <input name="instagram" type="url"/>
         </label>
         <label>
-         X / Twitter
+         X / Twitter — VTuber
+         <input name="twitterVtuber" type="url"/>
+        </label>
+        <label>
+         X / Twitter — Artista
+         <input name="twitterArt" type="url"/>
+        </label>
+        <label>
+         X / Twitter principal
          <input name="twitter" type="url"/>
         </label>
         <label>
